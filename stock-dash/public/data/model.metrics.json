@@ -1,0 +1,69 @@
+{
+  "bestModelName": "XGBoost",
+  "accuracy": 0.5825,
+  "precision": 0.5859,
+  "recall": 0.5631,
+  "f1Score": 0.5743,
+  "confusionMatrix": [
+    [
+      62,
+      41
+    ],
+    [
+      45,
+      58
+    ]
+  ],
+  "featureImportances": [
+    {
+      "feature": "rsi",
+      "importance": 0.182,
+      "direction": "positive"
+    },
+    {
+      "feature": "sma20_sma50_crossover",
+      "importance": 0.151,
+      "direction": "positive"
+    },
+    {
+      "feature": "volatility30d",
+      "importance": 0.134,
+      "direction": "negative"
+    },
+    {
+      "feature": "revenueGrowthYoY",
+      "importance": 0.121,
+      "direction": "positive"
+    },
+    {
+      "feature": "fedFunds",
+      "importance": 0.098,
+      "direction": "negative"
+    },
+    {
+      "feature": "epsGrowthYoY",
+      "importance": 0.089,
+      "direction": "positive"
+    },
+    {
+      "feature": "cpi",
+      "importance": 0.076,
+      "direction": "negative"
+    },
+    {
+      "feature": "volume",
+      "importance": 0.062,
+      "direction": "positive"
+    },
+    {
+      "feature": "unemploymentRate",
+      "importance": 0.051,
+      "direction": "negative"
+    },
+    {
+      "feature": "gdpGrowthQoQ",
+      "importance": 0.036,
+      "direction": "positive"
+    }
+  ]
+}
