@@ -38,29 +38,6 @@ const stocks: Stock[] = [
   { symbol: 'NVDA', name: 'Nvidia', price: 118.4, changePercent: 2.4 },
 ];
 
-// Macro / economy pages, separate from individual stocks.
-interface Macro {
-  title: string;
-  url: string;
-  iosIcon: string;
-  mdIcon: string;
-}
-
-const macroPages: Macro[] = [
-  {
-    title: 'Inflation',
-    url: '/macro/inflation',
-    iosIcon: statsChartOutline,
-    mdIcon: statsChartSharp,
-  },
-  {
-    title: 'Interest rates',
-    url: '/macro/interest-rates',
-    iosIcon: cashOutline,
-    mdIcon: cashSharp,
-  },
-];
-
 const formatPrice = (price: number) =>
   price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
@@ -105,24 +82,6 @@ const Menu: React.FC = () => {
               </IonMenuToggle>
             );
           })}
-        </IonList>
-
-        <IonList id="macro-list">
-          <IonListHeader>Markets</IonListHeader>
-          {macroPages.map((page, index) => (
-            <IonMenuToggle key={index} autoHide={false}>
-              <IonItem
-                className={location.pathname === page.url ? 'selected' : ''}
-                routerLink={page.url}
-                routerDirection="none"
-                lines="none"
-                detail={false}
-              >
-                <IonIcon aria-hidden="true" slot="start" ios={page.iosIcon} md={page.mdIcon} />
-                <IonLabel>{page.title}</IonLabel>
-              </IonItem>
-            </IonMenuToggle>
-          ))}
         </IonList>
       </IonContent>
     </IonMenu>
