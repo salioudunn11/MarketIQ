@@ -1,6 +1,11 @@
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { useParams } from 'react-router';
 import ExploreContainer from '../components/ExploreContainer';
+import finance from '../data/financial.json';
+import macro from '../data/macro_indicator.json';
+import metrics from '../data/model.metrics.json';
+import stock from '../data/stock.json';
+
 import './Page.css';
 
 const Page: React.FC = () => {
