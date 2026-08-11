@@ -45,7 +45,9 @@ const App: React.FC = () => {
             {/* <Route path="/" exact={true} element={}/> */}
 
             {/* Route matching stock watchlist selection */}
-            <Route path="/stock/:symbol" element={<Page />} />
+            <Route path="/stock/:symbol">
+	      <Page />
+	    </Route>
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
