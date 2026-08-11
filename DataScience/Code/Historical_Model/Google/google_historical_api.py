@@ -1,12 +1,10 @@
-
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 import joblib
-from tensorflow.keras.models import load_model
 from datetime import timedelta
 
-app = FastAPI(title="Google Stock LSTM Prediction API")
+app = FastAPI(title="Google Stock XGBoost Prediction API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -15,42 +13,49 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-MODEL_PATH = "export/google_lstm_model.keras"
-SCALER_PATH = "export/price_scaler.pkl"
+MODEL_PATH = "export/google_xgb_model.pkl"
 CSV_PATH = "../../../Yahoo_Finance/Google/GOOG_historical_stock.csv"
 
 LOOKBACK = 3
 HORIZON = 30
+ROLLING_WINDOW = 5  # must match what the model was trained on
 
-model = load_model(MODEL_PATH)
-scaler = joblib.load(SCALER_PATH)
+model = joblib.load(MODEL_PATH)
 
 
-def get_latest_window():
+def get_latest_features():
     df = pd.read_csv(CSV_PATH)
     df['Date'] = pd.to_datetime(df['Date'])
     df = df.sort_values('Date').reset_index(drop=True)
 
-    if len(df) < LOOKBACK:
+    min_required = max(LOOKBACK, ROLLING_WINDOW) + 1
+    if len(df) < min_required:
         raise HTTPException(
             status_code=500, detail="Not enough data to predict")
 
-    last_prices = df['Close'].values[-LOOKBACK:].reshape(-1, 1)
     last_date = df['Date'].max()
     last_known_price = float(df['Close'].values[-1])
-    return last_prices, last_date, last_known_price
+
+    # Rebuild the same features the model was trained on.
+    # close_lag_1 = most recent close, close_lag_2 = one before that, etc.
+    lag_features = {}
+    for lag in range(1, LOOKBACK + 1):
+        lag_features[f'close_lag_{lag}'] = float(df['Close'].values[-lag])
+
+    recent_window = df['Close'].values[-ROLLING_WINDOW:]
+    lag_features['rolling_mean_5'] = float(recent_window.mean())
+    lag_features['rolling_std_5'] = float(recent_window.std())
+
+    feature_row = pd.DataFrame([lag_features])
+
+    return feature_row, last_date, last_known_price
 
 
 @app.get("/predict")
 def predict():
-    last_prices, last_date, last_known_price = get_latest_window()
+    feature_row, last_date, last_known_price = get_latest_features()
 
-
-    scaled_window = scaler.transform(last_prices)
-    X = scaled_window.reshape((1, LOOKBACK, 1))
-
-    pred_scaled = model.predict(X, verbose=0)
-    pred_price = float(scaler.inverse_transform(pred_scaled)[0][0])
+    pred_price = float(model.predict(feature_row)[0])
 
     target_date = last_date + timedelta(days=HORIZON)
 
