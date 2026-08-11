@@ -1,2 +1,4 @@
 /Yahoo_Finance
 .env
+/Stock_data/Google_clean.csv
+/Stock_data/GOOG.csv
