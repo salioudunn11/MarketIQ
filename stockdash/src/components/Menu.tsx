@@ -21,9 +21,7 @@ import {
 } from 'ionicons/icons';
 import './Menu.css';
 
-// One row per stock in your watchlist.
-// symbol/name/price/change would normally come from your stock_history.json
-// (latest row per ticker), not hardcoded like this.
+
 interface Stock {
   symbol: string;
   name: string;
@@ -34,22 +32,24 @@ interface Stock {
 const stocks: Stock[] = [
   { symbol: 'AAPL', name: 'Apple Inc.', price: 178.52, changePercent: 0.7 },
   { symbol: 'MSFT', name: 'Microsoft', price: 412.3, changePercent: 1.2 },
-  { symbol: 'TSLA', name: 'Tesla', price: 241.9, changePercent: -1.8 },
-  { symbol: 'NVDA', name: 'Nvidia', price: 118.4, changePercent: 2.4 },
+  { symbol: 'GOOG', name: 'Alphabet Inc', price: 178.20, changePercent: 1.5 },
 ];
 
 const formatPrice = (price: number) =>
   price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
 const Menu: React.FC = () => {
+console.log(123);
   const location = useLocation();
-
+  console.log(location);
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList id="stocks-list">
-          <IonListHeader>MarketIQ</IonListHeader>
-          {stocks.map((stock) => {
+        <IonListHeader style={{ fontSize: '20px', fontWeight: 'bold', paddingBottom: '12px' }}>
+            MarketIQ
+          </IonListHeader>         
+           {stocks.map((stock) => {
             const url = `/stock/${stock.symbol}`;
             const isPositive = stock.changePercent >= 0;
 
