@@ -1,0 +1,770 @@
+[
+  {
+    "date": "2018-08-01",
+    "cpi": 2.87,
+    "fedFunds": 2.05,
+    "unemploymentRate": 3.93,
+    "gdp": 20643.5,
+    "gdpGrowthQoQ": 2.1
+  },
+  {
+    "date": "2018-09-01",
+    "cpi": 2.9,
+    "fedFunds": 2.06,
+    "unemploymentRate": 3.98,
+    "gdp": 20788.0,
+    "gdpGrowthQoQ": 2.1
+  },
+  {
+    "date": "2018-10-01",
+    "cpi": 2.97,
+    "fedFunds": 2.1,
+    "unemploymentRate": 3.98,
+    "gdp": 20813.6,
+    "gdpGrowthQoQ": 0.37
+  },
+  {
+    "date": "2018-11-01",
+    "cpi": 2.92,
+    "fedFunds": 2.13,
+    "unemploymentRate": 4.0,
+    "gdp": 20839.3,
+    "gdpGrowthQoQ": 0.37
+  },
+  {
+    "date": "2018-12-01",
+    "cpi": 2.88,
+    "fedFunds": 2.19,
+    "unemploymentRate": 3.96,
+    "gdp": 20865.0,
+    "gdpGrowthQoQ": 0.37
+  },
+  {
+    "date": "2019-01-01",
+    "cpi": 2.86,
+    "fedFunds": 2.17,
+    "unemploymentRate": 4.05,
+    "gdp": 21020.1,
+    "gdpGrowthQoQ": 2.23
+  },
+  {
+    "date": "2019-02-01",
+    "cpi": 2.94,
+    "fedFunds": 2.22,
+    "unemploymentRate": 3.98,
+    "gdp": 21176.4,
+    "gdpGrowthQoQ": 2.23
+  },
+  {
+    "date": "2019-03-01",
+    "cpi": 2.94,
+    "fedFunds": 2.26,
+    "unemploymentRate": 3.92,
+    "gdp": 21333.8,
+    "gdpGrowthQoQ": 2.23
+  },
+  {
+    "date": "2019-04-01",
+    "cpi": 3.04,
+    "fedFunds": 2.3,
+    "unemploymentRate": 3.87,
+    "gdp": 21513.0,
+    "gdpGrowthQoQ": 2.52
+  },
+  {
+    "date": "2019-05-01",
+    "cpi": 3.01,
+    "fedFunds": 2.38,
+    "unemploymentRate": 3.86,
+    "gdp": 21693.7,
+    "gdpGrowthQoQ": 2.52
+  },
+  {
+    "date": "2019-06-01",
+    "cpi": 3.04,
+    "fedFunds": 2.41,
+    "unemploymentRate": 3.86,
+    "gdp": 21875.9,
+    "gdpGrowthQoQ": 2.52
+  },
+  {
+    "date": "2019-07-01",
+    "cpi": 3.02,
+    "fedFunds": 2.41,
+    "unemploymentRate": 3.92,
+    "gdp": 21902.9,
+    "gdpGrowthQoQ": 0.37
+  },
+  {
+    "date": "2019-08-01",
+    "cpi": 3.08,
+    "fedFunds": 2.43,
+    "unemploymentRate": 4.0,
+    "gdp": 21929.9,
+    "gdpGrowthQoQ": 0.37
+  },
+  {
+    "date": "2019-09-01",
+    "cpi": 3.17,
+    "fedFunds": 2.51,
+    "unemploymentRate": 4.05,
+    "gdp": 21957.0,
+    "gdpGrowthQoQ": 0.37
+  },
+  {
+    "date": "2019-10-01",
+    "cpi": 3.2,
+    "fedFunds": 2.59,
+    "unemploymentRate": 3.99,
+    "gdp": 22049.2,
+    "gdpGrowthQoQ": 1.26
+  },
+  {
+    "date": "2019-11-01",
+    "cpi": 3.28,
+    "fedFunds": 2.63,
+    "unemploymentRate": 4.06,
+    "gdp": 22141.8,
+    "gdpGrowthQoQ": 1.26
+  },
+  {
+    "date": "2019-12-01",
+    "cpi": 3.36,
+    "fedFunds": 2.69,
+    "unemploymentRate": 4.04,
+    "gdp": 22234.8,
+    "gdpGrowthQoQ": 1.26
+  },
+  {
+    "date": "2020-01-01",
+    "cpi": 3.38,
+    "fedFunds": 2.76,
+    "unemploymentRate": 4.12,
+    "gdp": 22303.7,
+    "gdpGrowthQoQ": 0.93
+  },
+  {
+    "date": "2020-02-01",
+    "cpi": 3.33,
+    "fedFunds": 2.79,
+    "unemploymentRate": 4.15,
+    "gdp": 22372.8,
+    "gdpGrowthQoQ": 0.93
+  },
+  {
+    "date": "2020-03-01",
+    "cpi": 3.43,
+    "fedFunds": 2.86,
+    "unemploymentRate": 4.15,
+    "gdp": 22442.2,
+    "gdpGrowthQoQ": 0.93
+  },
+  {
+    "date": "2020-04-01",
+    "cpi": 3.47,
+    "fedFunds": 2.97,
+    "unemploymentRate": 4.11,
+    "gdp": 22573.1,
+    "gdpGrowthQoQ": 1.75
+  },
+  {
+    "date": "2020-05-01",
+    "cpi": 3.5,
+    "fedFunds": 3.06,
+    "unemploymentRate": 4.06,
+    "gdp": 22704.8,
+    "gdpGrowthQoQ": 1.75
+  },
+  {
+    "date": "2020-06-01",
+    "cpi": 3.47,
+    "fedFunds": 3.13,
+    "unemploymentRate": 4.12,
+    "gdp": 22837.2,
+    "gdpGrowthQoQ": 1.75
+  },
+  {
+    "date": "2020-07-01",
+    "cpi": 3.48,
+    "fedFunds": 3.22,
+    "unemploymentRate": 4.09,
+    "gdp": 22828.1,
+    "gdpGrowthQoQ": -0.12
+  },
+  {
+    "date": "2020-08-01",
+    "cpi": 3.44,
+    "fedFunds": 3.32,
+    "unemploymentRate": 4.14,
+    "gdp": 22819.0,
+    "gdpGrowthQoQ": -0.12
+  },
+  {
+    "date": "2020-09-01",
+    "cpi": 3.44,
+    "fedFunds": 3.42,
+    "unemploymentRate": 4.16,
+    "gdp": 22809.8,
+    "gdpGrowthQoQ": -0.12
+  },
+  {
+    "date": "2020-10-01",
+    "cpi": 3.53,
+    "fedFunds": 3.54,
+    "unemploymentRate": 4.14,
+    "gdp": 23050.1,
+    "gdpGrowthQoQ": 3.16
+  },
+  {
+    "date": "2020-11-01",
+    "cpi": 3.62,
+    "fedFunds": 3.64,
+    "unemploymentRate": 4.2,
+    "gdp": 23292.9,
+    "gdpGrowthQoQ": 3.16
+  },
+  {
+    "date": "2020-12-01",
+    "cpi": 3.64,
+    "fedFunds": 3.72,
+    "unemploymentRate": 4.16,
+    "gdp": 23538.2,
+    "gdpGrowthQoQ": 3.16
+  },
+  {
+    "date": "2021-01-01",
+    "cpi": 3.73,
+    "fedFunds": 3.78,
+    "unemploymentRate": 4.09,
+    "gdp": 23732.8,
+    "gdpGrowthQoQ": 2.48
+  },
+  {
+    "date": "2021-02-01",
+    "cpi": 3.79,
+    "fedFunds": 3.89,
+    "unemploymentRate": 4.13,
+    "gdp": 23929.0,
+    "gdpGrowthQoQ": 2.48
+  },
+  {
+    "date": "2021-03-01",
+    "cpi": 3.96,
+    "fedFunds": 3.98,
+    "unemploymentRate": 4.1,
+    "gdp": 24126.8,
+    "gdpGrowthQoQ": 2.48
+  },
+  {
+    "date": "2021-04-01",
+    "cpi": 4.23,
+    "fedFunds": 4.09,
+    "unemploymentRate": 4.02,
+    "gdp": 24187.2,
+    "gdpGrowthQoQ": 0.75
+  },
+  {
+    "date": "2021-05-01",
+    "cpi": 4.65,
+    "fedFunds": 4.31,
+    "unemploymentRate": 4.05,
+    "gdp": 24247.6,
+    "gdpGrowthQoQ": 0.75
+  },
+  {
+    "date": "2021-06-01",
+    "cpi": 4.95,
+    "fedFunds": 4.49,
+    "unemploymentRate": 4.12,
+    "gdp": 24308.2,
+    "gdpGrowthQoQ": 0.75
+  },
+  {
+    "date": "2021-07-01",
+    "cpi": 5.26,
+    "fedFunds": 4.74,
+    "unemploymentRate": 4.04,
+    "gdp": 24330.9,
+    "gdpGrowthQoQ": 0.28
+  },
+  {
+    "date": "2021-08-01",
+    "cpi": 5.66,
+    "fedFunds": 5.04,
+    "unemploymentRate": 4.09,
+    "gdp": 24353.6,
+    "gdpGrowthQoQ": 0.28
+  },
+  {
+    "date": "2021-09-01",
+    "cpi": 5.99,
+    "fedFunds": 5.32,
+    "unemploymentRate": 4.09,
+    "gdp": 24376.4,
+    "gdpGrowthQoQ": 0.28
+  },
+  {
+    "date": "2021-10-01",
+    "cpi": 6.39,
+    "fedFunds": 5.63,
+    "unemploymentRate": 4.08,
+    "gdp": 24418.6,
+    "gdpGrowthQoQ": 0.52
+  },
+  {
+    "date": "2021-11-01",
+    "cpi": 6.77,
+    "fedFunds": 5.93,
+    "unemploymentRate": 4.1,
+    "gdp": 24460.9,
+    "gdpGrowthQoQ": 0.52
+  },
+  {
+    "date": "2021-12-01",
+    "cpi": 7.21,
+    "fedFunds": 6.0,
+    "unemploymentRate": 4.1,
+    "gdp": 24503.3,
+    "gdpGrowthQoQ": 0.52
+  },
+  {
+    "date": "2022-01-01",
+    "cpi": 7.55,
+    "fedFunds": 6.0,
+    "unemploymentRate": 4.09,
+    "gdp": 24540.1,
+    "gdpGrowthQoQ": 0.45
+  },
+  {
+    "date": "2022-02-01",
+    "cpi": 7.82,
+    "fedFunds": 6.0,
+    "unemploymentRate": 4.14,
+    "gdp": 24576.9,
+    "gdpGrowthQoQ": 0.45
+  },
+  {
+    "date": "2022-03-01",
+    "cpi": 8.01,
+    "fedFunds": 6.0,
+    "unemploymentRate": 4.06,
+    "gdp": 24613.8,
+    "gdpGrowthQoQ": 0.45
+  },
+  {
+    "date": "2022-04-01",
+    "cpi": 8.17,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.99,
+    "gdp": 24836.1,
+    "gdpGrowthQoQ": 2.71
+  },
+  {
+    "date": "2022-05-01",
+    "cpi": 8.52,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.98,
+    "gdp": 25060.5,
+    "gdpGrowthQoQ": 2.71
+  },
+  {
+    "date": "2022-06-01",
+    "cpi": 8.76,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.92,
+    "gdp": 25286.9,
+    "gdpGrowthQoQ": 2.71
+  },
+  {
+    "date": "2022-07-01",
+    "cpi": 8.46,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.89,
+    "gdp": 25466.4,
+    "gdpGrowthQoQ": 2.13
+  },
+  {
+    "date": "2022-08-01",
+    "cpi": 8.28,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.91,
+    "gdp": 25647.2,
+    "gdpGrowthQoQ": 2.13
+  },
+  {
+    "date": "2022-09-01",
+    "cpi": 8.19,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.94,
+    "gdp": 25829.3,
+    "gdpGrowthQoQ": 2.13
+  },
+  {
+    "date": "2022-10-01",
+    "cpi": 7.84,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.85,
+    "gdp": 26029.9,
+    "gdpGrowthQoQ": 2.33
+  },
+  {
+    "date": "2022-11-01",
+    "cpi": 7.55,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.8,
+    "gdp": 26232.1,
+    "gdpGrowthQoQ": 2.33
+  },
+  {
+    "date": "2022-12-01",
+    "cpi": 7.41,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.71,
+    "gdp": 26435.8,
+    "gdpGrowthQoQ": 2.33
+  },
+  {
+    "date": "2023-01-01",
+    "cpi": 7.17,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.76,
+    "gdp": 26487.8,
+    "gdpGrowthQoQ": 0.59
+  },
+  {
+    "date": "2023-02-01",
+    "cpi": 6.97,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.82,
+    "gdp": 26539.9,
+    "gdpGrowthQoQ": 0.59
+  },
+  {
+    "date": "2023-03-01",
+    "cpi": 6.65,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.8,
+    "gdp": 26592.1,
+    "gdpGrowthQoQ": 0.59
+  },
+  {
+    "date": "2023-04-01",
+    "cpi": 6.52,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.76,
+    "gdp": 26777.3,
+    "gdpGrowthQoQ": 2.09
+  },
+  {
+    "date": "2023-05-01",
+    "cpi": 6.33,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.67,
+    "gdp": 26963.9,
+    "gdpGrowthQoQ": 2.09
+  },
+  {
+    "date": "2023-06-01",
+    "cpi": 6.23,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.63,
+    "gdp": 27151.7,
+    "gdpGrowthQoQ": 2.09
+  },
+  {
+    "date": "2023-07-01",
+    "cpi": 5.97,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.56,
+    "gdp": 27131.8,
+    "gdpGrowthQoQ": -0.22
+  },
+  {
+    "date": "2023-08-01",
+    "cpi": 5.64,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.58,
+    "gdp": 27111.9,
+    "gdpGrowthQoQ": -0.22
+  },
+  {
+    "date": "2023-09-01",
+    "cpi": 5.43,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.49,
+    "gdp": 27092.0,
+    "gdpGrowthQoQ": -0.22
+  },
+  {
+    "date": "2023-10-01",
+    "cpi": 5.27,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.48,
+    "gdp": 27176.9,
+    "gdpGrowthQoQ": 0.94
+  },
+  {
+    "date": "2023-11-01",
+    "cpi": 5.04,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.39,
+    "gdp": 27262.1,
+    "gdpGrowthQoQ": 0.94
+  },
+  {
+    "date": "2023-12-01",
+    "cpi": 4.82,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.41,
+    "gdp": 27347.5,
+    "gdpGrowthQoQ": 0.94
+  },
+  {
+    "date": "2024-01-01",
+    "cpi": 4.89,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.39,
+    "gdp": 27381.2,
+    "gdpGrowthQoQ": 0.37
+  },
+  {
+    "date": "2024-02-01",
+    "cpi": 4.88,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.39,
+    "gdp": 27415.0,
+    "gdpGrowthQoQ": 0.37
+  },
+  {
+    "date": "2024-03-01",
+    "cpi": 4.97,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.38,
+    "gdp": 27448.8,
+    "gdpGrowthQoQ": 0.37
+  },
+  {
+    "date": "2024-04-01",
+    "cpi": 4.98,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.42,
+    "gdp": 27666.6,
+    "gdpGrowthQoQ": 2.38
+  },
+  {
+    "date": "2024-05-01",
+    "cpi": 5.01,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.44,
+    "gdp": 27886.1,
+    "gdpGrowthQoQ": 2.38
+  },
+  {
+    "date": "2024-06-01",
+    "cpi": 5.09,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.45,
+    "gdp": 28107.3,
+    "gdpGrowthQoQ": 2.38
+  },
+  {
+    "date": "2024-07-01",
+    "cpi": 5.05,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.42,
+    "gdp": 28273.1,
+    "gdpGrowthQoQ": 1.77
+  },
+  {
+    "date": "2024-08-01",
+    "cpi": 5.12,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.48,
+    "gdp": 28439.9,
+    "gdpGrowthQoQ": 1.77
+  },
+  {
+    "date": "2024-09-01",
+    "cpi": 5.04,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.43,
+    "gdp": 28607.7,
+    "gdpGrowthQoQ": 1.77
+  },
+  {
+    "date": "2024-10-01",
+    "cpi": 5.03,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.43,
+    "gdp": 28587.7,
+    "gdpGrowthQoQ": -0.21
+  },
+  {
+    "date": "2024-11-01",
+    "cpi": 5.01,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.45,
+    "gdp": 28567.7,
+    "gdpGrowthQoQ": -0.21
+  },
+  {
+    "date": "2024-12-01",
+    "cpi": 5.01,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.51,
+    "gdp": 28547.7,
+    "gdpGrowthQoQ": -0.21
+  },
+  {
+    "date": "2025-01-01",
+    "cpi": 5.06,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.47,
+    "gdp": 28725.7,
+    "gdpGrowthQoQ": 1.87
+  },
+  {
+    "date": "2025-02-01",
+    "cpi": 5.1,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.53,
+    "gdp": 28904.7,
+    "gdpGrowthQoQ": 1.87
+  },
+  {
+    "date": "2025-03-01",
+    "cpi": 5.08,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.57,
+    "gdp": 29084.9,
+    "gdpGrowthQoQ": 1.87
+  },
+  {
+    "date": "2025-04-01",
+    "cpi": 5.02,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.5,
+    "gdp": 29250.7,
+    "gdpGrowthQoQ": 1.71
+  },
+  {
+    "date": "2025-05-01",
+    "cpi": 4.99,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.56,
+    "gdp": 29417.4,
+    "gdpGrowthQoQ": 1.71
+  },
+  {
+    "date": "2025-06-01",
+    "cpi": 5.0,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.56,
+    "gdp": 29585.1,
+    "gdpGrowthQoQ": 1.71
+  },
+  {
+    "date": "2025-07-01",
+    "cpi": 4.97,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.53,
+    "gdp": 29635.4,
+    "gdpGrowthQoQ": 0.51
+  },
+  {
+    "date": "2025-08-01",
+    "cpi": 4.92,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.44,
+    "gdp": 29685.7,
+    "gdpGrowthQoQ": 0.51
+  },
+  {
+    "date": "2025-09-01",
+    "cpi": 4.99,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.46,
+    "gdp": 29736.2,
+    "gdpGrowthQoQ": 0.51
+  },
+  {
+    "date": "2025-10-01",
+    "cpi": 4.91,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.37,
+    "gdp": 29909.7,
+    "gdpGrowthQoQ": 1.75
+  },
+  {
+    "date": "2025-11-01",
+    "cpi": 4.96,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.27,
+    "gdp": 30084.1,
+    "gdpGrowthQoQ": 1.75
+  },
+  {
+    "date": "2025-12-01",
+    "cpi": 4.98,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.23,
+    "gdp": 30259.6,
+    "gdpGrowthQoQ": 1.75
+  },
+  {
+    "date": "2026-01-01",
+    "cpi": 4.98,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.2,
+    "gdp": 30259.6,
+    "gdpGrowthQoQ": -0.0
+  },
+  {
+    "date": "2026-02-01",
+    "cpi": 5.04,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.2,
+    "gdp": 30259.6,
+    "gdpGrowthQoQ": -0.0
+  },
+  {
+    "date": "2026-03-01",
+    "cpi": 4.97,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.2,
+    "gdp": 30259.6,
+    "gdpGrowthQoQ": -0.0
+  },
+  {
+    "date": "2026-04-01",
+    "cpi": 4.99,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.23,
+    "gdp": 30523.9,
+    "gdpGrowthQoQ": 2.62
+  },
+  {
+    "date": "2026-05-01",
+    "cpi": 5.07,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.2,
+    "gdp": 30790.5,
+    "gdpGrowthQoQ": 2.62
+  },
+  {
+    "date": "2026-06-01",
+    "cpi": 5.1,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.25,
+    "gdp": 31059.4,
+    "gdpGrowthQoQ": 2.62
+  },
+  {
+    "date": "2026-07-01",
+    "cpi": 5.15,
+    "fedFunds": 6.0,
+    "unemploymentRate": 3.2,
+    "gdp": 31030.4,
+    "gdpGrowthQoQ": -0.28
+  }
+]

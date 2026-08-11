@@ -1,0 +1,15 @@
+{
+  "ticker": "GOOGL",
+  "model_version": "1.0",
+  "last_known_date": "2026-08-04",
+  "last_known_price": 371.880005,
+  "prediction_target_date": "2026-09-03",
+  "predicted_price": 335.19,
+  "lookback_days": 3,
+  "horizon_days": 30,
+  "test_metrics": {
+    "rmse": 30.98,
+    "mae": 20.84,
+    "mape_percent": 10.06
+  }
+}
