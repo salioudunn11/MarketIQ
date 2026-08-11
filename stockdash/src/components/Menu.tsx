@@ -11,56 +11,58 @@ import {
 } from '@ionic/react';
 
 import { useLocation } from 'react-router-dom';
-import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
+import {
+  trendingUpOutline,
+  trendingUpSharp,
+  cashOutline,
+  cashSharp,
+  statsChartOutline,
+  statsChartSharp,
+} from 'ionicons/icons';
 import './Menu.css';
 
-interface AppPage {
+// One row per stock in your watchlist.
+// symbol/name/price/change would normally come from your stock_history.json
+// (latest row per ticker), not hardcoded like this.
+interface Stock {
+  symbol: string;
+  name: string;
+  price: number;
+  changePercent: number;
+}
+
+const stocks: Stock[] = [
+  { symbol: 'AAPL', name: 'Apple Inc.', price: 178.52, changePercent: 0.7 },
+  { symbol: 'MSFT', name: 'Microsoft', price: 412.3, changePercent: 1.2 },
+  { symbol: 'TSLA', name: 'Tesla', price: 241.9, changePercent: -1.8 },
+  { symbol: 'NVDA', name: 'Nvidia', price: 118.4, changePercent: 2.4 },
+];
+
+// Macro / economy pages, separate from individual stocks.
+interface Macro {
+  title: string;
   url: string;
   iosIcon: string;
   mdIcon: string;
-  title: string;
 }
 
-const appPages: AppPage[] = [
+const macroPages: Macro[] = [
   {
-    title: 'Inbox',
-    url: '/folder/Inbox',
-    iosIcon: mailOutline,
-    mdIcon: mailSharp
+    title: 'Inflation',
+    url: '/macro/inflation',
+    iosIcon: statsChartOutline,
+    mdIcon: statsChartSharp,
   },
   {
-    title: 'Outbox',
-    url: '/folder/Outbox',
-    iosIcon: paperPlaneOutline,
-    mdIcon: paperPlaneSharp
+    title: 'Interest rates',
+    url: '/macro/interest-rates',
+    iosIcon: cashOutline,
+    mdIcon: cashSharp,
   },
-  {
-    title: 'Favorites',
-    url: '/folder/Favorites',
-    iosIcon: heartOutline,
-    mdIcon: heartSharp
-  },
-  {
-    title: 'Archived',
-    url: '/folder/Archived',
-    iosIcon: archiveOutline,
-    mdIcon: archiveSharp
-  },
-  {
-    title: 'Trash',
-    url: '/folder/Trash',
-    iosIcon: trashOutline,
-    mdIcon: trashSharp
-  },
-  {
-    title: 'Spam',
-    url: '/folder/Spam',
-    iosIcon: warningOutline,
-    mdIcon: warningSharp
-  }
 ];
 
-const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+const formatPrice = (price: number) =>
+  price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
 const Menu: React.FC = () => {
   const location = useLocation();
@@ -68,28 +70,58 @@ const Menu: React.FC = () => {
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>
-        <IonList id="inbox-list">
-          <IonListHeader>Inbox</IonListHeader>
-          <IonNote>hi@ionicframework.com</IonNote>
-          {appPages.map((appPage, index) => {
+        <IonList id="stocks-list">
+          <IonListHeader>MarketIQ</IonListHeader>
+          {stocks.map((stock) => {
+            const url = `/stock/${stock.symbol}`;
+            const isPositive = stock.changePercent >= 0;
+
             return (
-              <IonMenuToggle key={index} autoHide={false}>
-                <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
-                  <IonIcon aria-hidden="true" slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
-                  <IonLabel>{appPage.title}</IonLabel>
+              <IonMenuToggle key={stock.symbol} autoHide={false}>
+                <IonItem
+                  className={location.pathname === url ? 'selected' : ''}
+                  routerLink={url}
+                  routerDirection="none"
+                  lines="none"
+                  detail={false}
+                >
+                  <IonIcon
+                    aria-hidden="true"
+                    slot="start"
+                    ios={trendingUpOutline}
+                    md={trendingUpSharp}
+                  />
+                  <IonLabel>
+                    <h3>{stock.symbol}</h3>
+                    <p>{stock.name}</p>
+                  </IonLabel>
+                  <IonNote slot="end" color={isPositive ? 'success' : 'danger'}>
+                    {formatPrice(stock.price)}
+                    <br />
+                    {isPositive ? '+' : ''}
+                    {stock.changePercent}%
+                  </IonNote>
                 </IonItem>
               </IonMenuToggle>
             );
           })}
         </IonList>
 
-        <IonList id="labels-list">
-          <IonListHeader>Labels</IonListHeader>
-          {labels.map((label, index) => (
-            <IonItem lines="none" key={index}>
-              <IonIcon aria-hidden="true" slot="start" icon={bookmarkOutline} />
-              <IonLabel>{label}</IonLabel>
-            </IonItem>
+        <IonList id="macro-list">
+          <IonListHeader>Markets</IonListHeader>
+          {macroPages.map((page, index) => (
+            <IonMenuToggle key={index} autoHide={false}>
+              <IonItem
+                className={location.pathname === page.url ? 'selected' : ''}
+                routerLink={page.url}
+                routerDirection="none"
+                lines="none"
+                detail={false}
+              >
+                <IonIcon aria-hidden="true" slot="start" ios={page.iosIcon} md={page.mdIcon} />
+                <IonLabel>{page.title}</IonLabel>
+              </IonItem>
+            </IonMenuToggle>
           ))}
         </IonList>
       </IonContent>
