@@ -39,9 +39,7 @@ const formatPrice = (price: number) =>
   price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
 const Menu: React.FC = () => {
-console.log(123);
   const location = useLocation();
-  console.log(location);
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>
