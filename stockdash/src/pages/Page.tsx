@@ -3,7 +3,11 @@ import { useParams } from 'react-router';
 import ExploreContainer from '../components/ExploreContainer';
 import './Page.css';
 
-const Page: React.FC = () => {
+interface PageProps {
+  stockChosen: string | null;
+}
+
+const Page: React.FC<PageProps> = ({ stockChosen }) => {
 
   const { name } = useParams<{ name: string; }>();
 
@@ -18,13 +22,13 @@ const Page: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent fullscreen>
+      <IonContent fullscreen className="ion-padding">
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">{name}</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name={name} />
+        <ExploreContainer name={name} stockChosen={stockChosen} />
       </IonContent>
     </IonPage>
   );
