@@ -18,7 +18,7 @@ CSV_PATH = "../../../Yahoo_Finance/Google/GOOG_historical_stock.csv"
 
 LOOKBACK = 3
 HORIZON = 30
-ROLLING_WINDOW = 5  # must match what the model was trained on
+ROLLING_WINDOW = 5  
 
 model = joblib.load(MODEL_PATH)
 
