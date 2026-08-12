@@ -22,6 +22,9 @@ import {
 import './Menu.css';
 
 
+// One row per stock in your watchlist.
+// symbol/name/price/change would normally come from your stock_history.json
+// (latest row per ticker), not hardcoded like this.
 interface Stock {
   symbol: string;
   name: string;
@@ -35,28 +38,55 @@ const stocks: Stock[] = [
   { symbol: 'GOOG', name: 'Alphabet Inc', price: 178.20, changePercent: 1.5 },
 ];
 
+
+// Macro / economy pages, separate from individual stocks.
+interface Macro {
+  title: string;
+  url: string;
+  iosIcon: string;
+  mdIcon: string;
+}
+
+interface MenuProps{
+  stockChosen: string |null;
+  onSelectStock: (symbol: string) => void;
+}
+
+const macroPages: Macro[] = [
+  {
+    title: 'Inflation',
+    url: '/macro/inflation',
+    iosIcon: statsChartOutline,
+    mdIcon: statsChartSharp,
+  },
+  {
+    title: 'Interest rates',
+    url: '/macro/interest-rates',
+    iosIcon: cashOutline,
+    mdIcon: cashSharp,
+  },
+];
+
 const formatPrice = (price: number) =>
   price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
-const Menu: React.FC = () => {
+const Menu: React.FC<MenuProps> = ({ stockChosen, onSelectStock }) => {
   const location = useLocation();
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList id="stocks-list">
-        <IonListHeader style={{ fontSize: '20px', fontWeight: 'bold', paddingBottom: '12px' }}>
-            MarketIQ
-          </IonListHeader>         
-           {stocks.map((stock) => {
-            const url = `/stock/${stock.symbol}`;
+          <IonListHeader>MarketIQ</IonListHeader>
+          {stocks.map((stock) => {
+           
             const isPositive = stock.changePercent >= 0;
 
             return (
               <IonMenuToggle key={stock.symbol} autoHide={false}>
                 <IonItem
-                  className={location.pathname === url ? 'selected' : ''}
-                  routerLink={url}
-                  routerDirection="none"
+                className={stockChosen  === stock.symbol ? 'selected' : ''}
+                  onClick={() => onSelectStock(stock.symbol)}
+                  button // Adds the clickable ripple effect
                   lines="none"
                   detail={false}
                 >
@@ -76,6 +106,7 @@ const Menu: React.FC = () => {
                     {isPositive ? '+' : ''}
                     {stock.changePercent}%
                   </IonNote>
+
                 </IonItem>
               </IonMenuToggle>
             );
