@@ -1,6 +1,6 @@
 import { IonApp, IonRouterOutlet, IonSplitPane, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { Route } from 'react-router-dom';
+import { Route } from "react-router";
 import Menu from './components/Menu';
 import Page from './pages/Page';
 
@@ -45,9 +45,7 @@ const App: React.FC = () => {
             {/* <Route path="/" exact={true} element={}/> */}
 
             {/* Route matching stock watchlist selection */}
-            <Route path="/stock/:symbol">
-	      <Page />
-	    </Route>
+            <Route path="/stock/:symbol" component={Page} />
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
