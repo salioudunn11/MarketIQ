@@ -21,6 +21,7 @@ import {
 } from 'ionicons/icons';
 import './Menu.css';
 
+
 // One row per stock in your watchlist.
 // symbol/name/price/change would normally come from your stock_history.json
 // (latest row per ticker), not hardcoded like this.
@@ -46,6 +47,11 @@ interface Macro {
   mdIcon: string;
 }
 
+interface MenuProps{
+  stockChosen: string |null;
+  onSelectStock: (symbol: string) => void;
+}
+
 const macroPages: Macro[] = [
   {
     title: 'Inflation',
@@ -64,7 +70,7 @@ const macroPages: Macro[] = [
 const formatPrice = (price: number) =>
   price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
-const Menu: React.FC = () => {
+const Menu: React.FC<MenuProps> = ({ stockChosen, onSelectStock }) => {
   const location = useLocation();
 
   return (
@@ -73,15 +79,15 @@ const Menu: React.FC = () => {
         <IonList id="stocks-list">
           <IonListHeader>MarketIQ</IonListHeader>
           {stocks.map((stock) => {
-            const url = `/stock/${stock.symbol}`;
+           
             const isPositive = stock.changePercent >= 0;
 
             return (
               <IonMenuToggle key={stock.symbol} autoHide={false}>
                 <IonItem
-                  className={location.pathname === url ? 'selected' : ''}
-                  routerLink={url}
-                  routerDirection="none"
+                className={stockChosen  === stock.symbol ? 'selected' : ''}
+                  onClick={() => onSelectStock(stock.symbol)}
+                  button // Adds the clickable ripple effect
                   lines="none"
                   detail={false}
                 >
@@ -101,6 +107,7 @@ const Menu: React.FC = () => {
                     {isPositive ? '+' : ''}
                     {stock.changePercent}%
                   </IonNote>
+
                 </IonItem>
               </IonMenuToggle>
             );
