@@ -28,6 +28,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import LandingPage from './pages/LandingPage';
 
 setupIonicReact();
 
@@ -46,6 +47,7 @@ const App: React.FC = () => {
 
             {/* Route matching stock watchlist selection */}
             <Route path="/stock/:symbol" component={Page} />
+            <Route path="/" component={LandingPage} />
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
