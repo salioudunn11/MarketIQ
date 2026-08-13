@@ -5,8 +5,9 @@ import pandas as pd
 import joblib
 from tensorflow.keras.models import load_model
 from datetime import timedelta
-
+from pathlib import Path
 app = FastAPI(title="Google Stock LSTM Prediction API")
+BASE_DIR = Path(__file__).resolve().parent
 
 app.add_middleware(
     CORSMiddleware,
@@ -14,10 +15,9 @@ app.add_middleware(
     allow_methods=["GET"],
     allow_headers=["*"],
 )
-
-MODEL_PATH = "export/google_lstm_model.keras"
-SCALER_PATH = "export/price_scaler.pkl"
-CSV_PATH = "../../../Yahoo_Finance/Google/GOOG_historical_stock.csv"
+CSV_PATH = BASE_DIR.parents[2] / "Yahoo_Finance" / "Google" / "GOOG_historical_stock.csv"
+MODEL_PATH = BASE_DIR / "export" / "google_lstm_model.keras"
+SCALER_PATH = BASE_DIR / "export" / "price_scaler.pkl"
 
 LOOKBACK = 3
 HORIZON = 30

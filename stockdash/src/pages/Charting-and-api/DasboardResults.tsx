@@ -2,72 +2,72 @@ import React, { useEffect, useState } from 'react';
 import {
   IonBackButton,
   IonButtons,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
   IonContent,
   IonHeader,
   IonPage,
   IonSpinner,
   IonTitle,
   IonToolbar,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
+  IonText
 } from '@ionic/react';
-import { useLocation, useParams } from 'react-router-dom';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  ReferenceDot
-} from 'recharts';
+import { useParams, useLocation } from 'react-router-dom';
 
-interface ChartDataPoint {
-  date: string;
-  price: number;
-  isPrediction: boolean;
+// Define the shape of the data coming from your FastAPI backend
+interface PredictionResponse {
+  ticker: string;
+  last_known_date: string;
+  last_known_price: number;
+  prediction_target_date: string;
+  predicted_price: number;
+  lookback_days: number;
+  horizon_days: number;
 }
 
 const DashboardResults: React.FC = () => {
+  // 1. Pull the stock symbol from the URL (e.g., /dashboard/GOOGL)
   const { symbol } = useParams<{ symbol: string }>();
-  const location = useLocation();
   
-  const [data, setData] = useState<ChartDataPoint[]>([]);
+  // 2. Pull the macro variables from the URL query string (e.g., ?inflation=3.2)
+  const location = useLocation();
+
+  // 3. Set up state to manage the API data, loading status, and errors
+  const [data, setData] = useState<PredictionResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  // 4. Fetch the data when the component mounts
   useEffect(() => {
     const fetchPrediction = async () => {
-      // 1. Extract the macro values you submitted from the URL
-      const queryParams = new URLSearchParams(location.search);
-      const inflation = queryParams.get('inflation') || 0;
-      const interestRate = queryParams.get('interestRate') || 0;
-      const unemploymentRate = queryParams.get('unemploymentRate') || 0;
-      const gdp = queryParams.get('gdp') || 0;
+      setLoading(true);
+      setError(null);
 
       try {
-        // 2. Fetch the factored data from your FastAPI backend
-        const url = `http://localhost:8000/predict?ticker=${symbol}&inflation=${inflation}&interestRate=${interestRate}&unemploymentRate=${unemploymentRate}&gdp=${gdp}`;
-        const response = await fetch(url);
+        // Fetching from your local Uvicorn server
+        const response = await fetch('http://127.0.0.1:8000/predict');
         
-        if (!response.ok) throw new Error('API failed to respond');
+        if (!response.ok) {
+          throw new Error(`API error: ${response.statusText}`);
+        }
         
-        const result = await response.json();
-        
-        // 3. Set the Recharts array to state
-        setData(result.chartData);
+        const result: PredictionResponse = await response.json();
+        setData(result);
       } catch (err: any) {
-        setError(err.message);
+        console.error("Failed to fetch prediction:", err);
+        setError(err.message || 'Failed to connect to the backend.');
       } finally {
         setLoading(false);
       }
     };
 
     fetchPrediction();
-  }, [symbol, location.search]);
+  }, [symbol]); // The dependency array ensures it re-runs if the symbol changes
+
+  // Helper to parse URL query params for display
+  const queryParams = new URLSearchParams(location.search);
 
   return (
     <IonPage>
@@ -80,45 +80,64 @@ const DashboardResults: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent fullscreen className="ion-padding">
-        <IonCard color="dark">
-          <IonCardHeader>
-            <IonCardTitle>30-Day Factored Trajectory</IonCardTitle>
-          </IonCardHeader>
-          <IonCardContent>
-            {loading && <IonSpinner name="crescent" />}
-            {error && <p style={{ color: 'var(--ion-color-danger)' }}>Error: {error}</p>}
+      <IonContent className="ion-padding">
+        {/* State 1: Loading */}
+        {loading && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
+            <IonSpinner name="crescent" />
+            <span style={{ marginLeft: '10px' }}>Running LSTM Model...</span>
+          </div>
+        )}
+
+        {/* State 2: Error */}
+        {!loading && error && (
+          <IonCard color="danger">
+            <IonCardHeader>
+              <IonCardTitle>Connection Error</IonCardTitle>
+            </IonCardHeader>
+            <IonCardContent>
+              {error}
+              <p>Make sure your FastAPI server is running on port 8000.</p>
+            </IonCardContent>
+          </IonCard>
+        )}
+
+        {/* State 3: Success (Data Loaded) */}
+        {!loading && data && (
+          <>
+            <IonCard>
+              <IonCardHeader>
+                <IonCardTitle>Prediction Results for {data.ticker}</IonCardTitle>
+              </IonCardHeader>
+              <IonCardContent>
+                <h2>Last Known Price: <strong>${data.last_known_price}</strong> <IonText color="medium">({data.last_known_date})</IonText></h2>
+                <h2>Predicted Price: <strong>${data.predicted_price}</strong> <IonText color="primary">({data.prediction_target_date})</IonText></h2>
+                <hr style={{ margin: '15px 0', background: '#444' }} />
+                <p><strong>Lookback Window:</strong> {data.lookback_days} days</p>
+                <p><strong>Forecast Horizon:</strong> {data.horizon_days} days</p>
+              </IonCardContent>
+            </IonCard>
+
+            <IonCard>
+              <IonCardHeader>
+                <IonCardTitle>Macro Inputs Used</IonCardTitle>
+              </IonCardHeader>
+              <IonCardContent>
+                <ul>
+                  <li>Inflation: {queryParams.get('inflation')}%</li>
+                  <li>Interest Rate: {queryParams.get('interestRate')}%</li>
+                  <li>Unemployment: {queryParams.get('unemploymentRate')}%</li>
+                  <li>GDP Growth: {queryParams.get('gdp')}%</li>
+                </ul>
+              </IonCardContent>
+            </IonCard>
             
-            {/* 4. Render the Recharts visualization */}
-            {!loading && !error && data.length > 0 && (
-              <div style={{ width: '100%', height: 350 }}>
-                <ResponsiveContainer>
-                  <LineChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-                    <XAxis dataKey="date" stroke="#888" />
-                    <YAxis domain={['auto', 'auto']} stroke="#888" />
-                    <Tooltip contentStyle={{ backgroundColor: '#222', borderColor: '#444' }} />
-                    <Line 
-                      type="monotone" 
-                      dataKey="price" 
-                      stroke="#3880ff" 
-                      strokeWidth={2}
-                      dot={false}
-                    />
-                    {/* Highlight the ML prediction at the very end of the line */}
-                    <ReferenceDot 
-                      x={data[data.length - 1].date} 
-                      y={data[data.length - 1].price} 
-                      r={6} 
-                      fill="#2dd36f" 
-                      stroke="none" 
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-            )}
-          </IonCardContent>
-        </IonCard>
+            {/* IN THE NEXT STEP: We will replace this placeholder with Recharts! */}
+            <div style={{ textAlign: 'center', marginTop: '30px', color: 'gray' }}>
+              [ Recharts Graph Will Go Here ]
+            </div>
+          </>
+        )}
       </IonContent>
     </IonPage>
   );
