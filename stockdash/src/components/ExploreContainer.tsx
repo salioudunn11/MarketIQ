@@ -12,9 +12,8 @@ import {
 } from '@ionic/react';
 import {useState} from 'react';
 interface ContainerProps {
-
   name?: string;
-stockChosen?: string | null;
+  stockChosen?: string | null;
 }
 
 const ExploreContainer: React.FC<ContainerProps> = ({ stockChosen }) => {

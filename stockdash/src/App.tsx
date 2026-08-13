@@ -4,6 +4,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 import Menu from './components/Menu';
 import Page from './pages/Page';
+import DashboardResults from './pages/Charting-and-api/DasboardResults';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -49,7 +50,12 @@ const App: React.FC = () => {
               render={() => <Page stockChosen={selectedStock} />} 
             />
 
-            {/* 3. Catch-all: redirects any old/unmatched URL (e.g. /folder/Inbox) */}
+            {/* 3. Dashboard Charting route (Inside the outlet) */}
+            <Route path="/dashboard/:symbol" exact={true}>
+              <DashboardResults />
+            </Route>
+
+            {/* 4. Catch-all fallback (MUST BE LAST) */}
             <Route>
               <Redirect to="/macro/inflation" />
             </Route>
@@ -62,3 +68,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+
