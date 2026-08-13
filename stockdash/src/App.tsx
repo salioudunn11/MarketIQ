@@ -1,18 +1,16 @@
 import { IonApp, IonRouterOutlet, IonSplitPane, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { Route } from "react-router";
+import { Redirect, Route } from 'react-router';
 import Menu from './components/Menu';
 import Page from './pages/Page';
+import ChartsPage from './components/charts';
 
-/* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
-/* Basic CSS for apps built with Ionic */
 import '@ionic/react/css/normalize.css';
 import '@ionic/react/css/structure.css';
 import '@ionic/react/css/typography.css';
 
-/* Optional CSS utils that can be commented out */
 import '@ionic/react/css/padding.css';
 import '@ionic/react/css/float-elements.css';
 import '@ionic/react/css/text-alignment.css';
@@ -41,11 +39,16 @@ const App: React.FC = () => {
 
           {/* Main Display Area */}
           <IonRouterOutlet id="main">
-            {/* Redirect root URL straight to GOOGL */}
-            {/* <Route path="/" exact={true} element={}/> */}
+            {/* Redirect root URL straight to GOOG */}
+            <Route path="/" exact={true}>
+              <Redirect to="/stock/GOOG" />
+            </Route>
+
+            {/* Route matching the prediction charts page */}
+            <Route path="/stock/:symbol/charts" exact={true} component={ChartsPage} />
 
             {/* Route matching stock watchlist selection */}
-            <Route path="/stock/:symbol" component={Page} />
+            <Route path="/stock/:symbol" exact={true} component={Page} />
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
