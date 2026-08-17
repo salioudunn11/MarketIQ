@@ -1,0 +1,222 @@
+[
+  {
+    "date": "2021-09-30",
+    "quarter": "2021-Q3",
+    "revenue": 10287200000,
+    "netIncome": 2063200000,
+    "eps": 1.23,
+    "cashAndEquivalents": 13801000000,
+    "totalDebt": 10965000000,
+    "revenueGrowthYoY": null,
+    "epsGrowthYoY": null
+  },
+  {
+    "date": "2021-12-31",
+    "quarter": "2021-Q4",
+    "revenue": 11068700000,
+    "netIncome": 2148000000,
+    "eps": 1.33,
+    "cashAndEquivalents": 13567000000,
+    "totalDebt": 10874000000,
+    "revenueGrowthYoY": null,
+    "epsGrowthYoY": null
+  },
+  {
+    "date": "2022-03-31",
+    "quarter": "2022-Q1",
+    "revenue": 11202600000,
+    "netIncome": 2199600000,
+    "eps": 1.39,
+    "cashAndEquivalents": 14193000000,
+    "totalDebt": 10615000000,
+    "revenueGrowthYoY": null,
+    "epsGrowthYoY": null
+  },
+  {
+    "date": "2022-06-30",
+    "quarter": "2022-Q2",
+    "revenue": 11669700000,
+    "netIncome": 2729800000,
+    "eps": 1.51,
+    "cashAndEquivalents": 14564000000,
+    "totalDebt": 10507000000,
+    "revenueGrowthYoY": null,
+    "epsGrowthYoY": null
+  },
+  {
+    "date": "2022-09-30",
+    "quarter": "2022-Q3",
+    "revenue": 12478300000,
+    "netIncome": 2411600000,
+    "eps": 1.63,
+    "cashAndEquivalents": 14610000000,
+    "totalDebt": 10267000000,
+    "revenueGrowthYoY": 0.213,
+    "epsGrowthYoY": 0.3249
+  },
+  {
+    "date": "2022-12-31",
+    "quarter": "2022-Q4",
+    "revenue": 13333500000,
+    "netIncome": 2821300000,
+    "eps": 1.79,
+    "cashAndEquivalents": 14529000000,
+    "totalDebt": 10258000000,
+    "revenueGrowthYoY": 0.2046,
+    "epsGrowthYoY": 0.3438
+  },
+  {
+    "date": "2023-03-31",
+    "quarter": "2023-Q1",
+    "revenue": 13722400000,
+    "netIncome": 2965000000,
+    "eps": 1.88,
+    "cashAndEquivalents": 14312000000,
+    "totalDebt": 9981000000,
+    "revenueGrowthYoY": 0.2249,
+    "epsGrowthYoY": 0.3518
+  },
+  {
+    "date": "2023-06-30",
+    "quarter": "2023-Q2",
+    "revenue": 14287500000,
+    "netIncome": 3395100000,
+    "eps": 1.99,
+    "cashAndEquivalents": 14385000000,
+    "totalDebt": 9973000000,
+    "revenueGrowthYoY": 0.2243,
+    "epsGrowthYoY": 0.3194
+  },
+  {
+    "date": "2023-09-30",
+    "quarter": "2023-Q3",
+    "revenue": 15053200000,
+    "netIncome": 3176000000,
+    "eps": 2.15,
+    "cashAndEquivalents": 14902000000,
+    "totalDebt": 9796000000,
+    "revenueGrowthYoY": 0.2064,
+    "epsGrowthYoY": 0.3155
+  },
+  {
+    "date": "2023-12-31",
+    "quarter": "2023-Q4",
+    "revenue": 16291100000,
+    "netIncome": 3694200000,
+    "eps": 2.36,
+    "cashAndEquivalents": 15473000000,
+    "totalDebt": 9643000000,
+    "revenueGrowthYoY": 0.2218,
+    "epsGrowthYoY": 0.319
+  },
+  {
+    "date": "2024-03-31",
+    "quarter": "2024-Q1",
+    "revenue": 16933000000,
+    "netIncome": 3357200000,
+    "eps": 2.46,
+    "cashAndEquivalents": 16101000000,
+    "totalDebt": 9427000000,
+    "revenueGrowthYoY": 0.234,
+    "epsGrowthYoY": 0.3109
+  },
+  {
+    "date": "2024-06-30",
+    "quarter": "2024-Q2",
+    "revenue": 17774100000,
+    "netIncome": 3425900000,
+    "eps": 2.64,
+    "cashAndEquivalents": 16764000000,
+    "totalDebt": 9414000000,
+    "revenueGrowthYoY": 0.244,
+    "epsGrowthYoY": 0.3258
+  },
+  {
+    "date": "2024-09-30",
+    "quarter": "2024-Q3",
+    "revenue": 18951900000,
+    "netIncome": 4017100000,
+    "eps": 2.84,
+    "cashAndEquivalents": 17226000000,
+    "totalDebt": 9405000000,
+    "revenueGrowthYoY": 0.259,
+    "epsGrowthYoY": 0.3197
+  },
+  {
+    "date": "2024-12-31",
+    "quarter": "2024-Q4",
+    "revenue": 20443100000,
+    "netIncome": 5086200000,
+    "eps": 3.12,
+    "cashAndEquivalents": 17534000000,
+    "totalDebt": 9435000000,
+    "revenueGrowthYoY": 0.2549,
+    "epsGrowthYoY": 0.3239
+  },
+  {
+    "date": "2025-03-31",
+    "quarter": "2025-Q1",
+    "revenue": 20684700000,
+    "netIncome": 4945800000,
+    "eps": 3.3,
+    "cashAndEquivalents": 18577000000,
+    "totalDebt": 9540000000,
+    "revenueGrowthYoY": 0.2216,
+    "epsGrowthYoY": 0.3384
+  },
+  {
+    "date": "2025-06-30",
+    "quarter": "2025-Q2",
+    "revenue": 21585300000,
+    "netIncome": 4684100000,
+    "eps": 3.53,
+    "cashAndEquivalents": 18239000000,
+    "totalDebt": 9474000000,
+    "revenueGrowthYoY": 0.2144,
+    "epsGrowthYoY": 0.3384
+  },
+  {
+    "date": "2025-09-30",
+    "quarter": "2025-Q3",
+    "revenue": 22557500000,
+    "netIncome": 4470800000,
+    "eps": 3.68,
+    "cashAndEquivalents": 18995000000,
+    "totalDebt": 9251000000,
+    "revenueGrowthYoY": 0.1903,
+    "epsGrowthYoY": 0.2988
+  },
+  {
+    "date": "2025-12-31",
+    "quarter": "2025-Q4",
+    "revenue": 24191400000,
+    "netIncome": 5258400000,
+    "eps": 4.04,
+    "cashAndEquivalents": 18738000000,
+    "totalDebt": 9181000000,
+    "revenueGrowthYoY": 0.1834,
+    "epsGrowthYoY": 0.2944
+  },
+  {
+    "date": "2026-03-31",
+    "quarter": "2026-Q1",
+    "revenue": 24832000000,
+    "netIncome": 6253600000,
+    "eps": 4.3,
+    "cashAndEquivalents": 19658000000,
+    "totalDebt": 9034000000,
+    "revenueGrowthYoY": 0.2005,
+    "epsGrowthYoY": 0.305
+  },
+  {
+    "date": "2026-06-30",
+    "quarter": "2026-Q2",
+    "revenue": 26010500000,
+    "netIncome": 5595200000,
+    "eps": 4.66,
+    "cashAndEquivalents": 20771000000,
+    "totalDebt": 8831000000,
+    "revenueGrowthYoY": 0.205,
+    "epsGrowthYoY": 0.3181
+  }
+]
