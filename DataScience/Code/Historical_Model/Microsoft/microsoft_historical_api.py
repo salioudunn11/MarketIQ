@@ -7,15 +7,15 @@ from datetime import timedelta
 
 app = FastAPI(title= 'Microsoft Stock XGBoost Prediction API')
 
-app.add.middleware(
+app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
     allow_methods=['GET'],
     allow_headers=['*'],
 )
 
-MODEL_PATH = 'export.microsoft_xgb_model.pkl'
-CSV_PATH =  '../../../Yahoo_Finance/Google/MSFT_historical_data.csv'
+MODEL_PATH = 'export/microsoft_xgb_model.pkl'
+CSV_PATH =  '../../../Yahoo_Finance/Microsoft/MSFT_historical_data.csv'
 
 PAST = 3
 FUTURE = 30 
@@ -34,7 +34,7 @@ def get_latest_features():
             status_code = 500, details = 'Not Enough data to predict'
         )
     last_date = df['Date'].max()
-    last_known_price = float(df['Close'].values[-ROLLING_WINDOW:])
+    last_known_price = float(df['Close'].values[-1])
 
     lag_features = {}
     for lag in range(1, PAST + 1):
@@ -42,7 +42,7 @@ def get_latest_features():
 
     recent_windows = df['Close'].values[-ROLLING_WINDOW:]
     lag_features['rolling_mean_5'] = float(recent_windows.mean())
-    lag_features['rolling_mean_5'] = float(recent_windows.std())
+    lag_features['rolling_std_5'] = float(recent_windows.std())
 
     feature_row = pd.DataFrame([lag_features])
 

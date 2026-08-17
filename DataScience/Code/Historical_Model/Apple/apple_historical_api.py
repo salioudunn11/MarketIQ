@@ -8,12 +8,12 @@ app = FastAPI(title= 'Apple STOCK XGBoost Prediction API')
 
 app.add.middleware(
     CORSMiddleware,
-    allow_origins=['*']
+    allow_origins=['*'],
     allow_methods= ['GET'],
     allow_headers=['*'],
 )
 
-MODEL_PATH = 'export.apple_xgb_model.pkl'
+MODEL_PATH = 'export/apple_xgb_model.pkl'
 CSV_PATH = '../../../Yahoo_Finance/Apple/AAPL_historical_stock.csv'
 
 PAST = 3
@@ -27,28 +27,28 @@ def get_latest_features():
     df['Date'] = pd.to_datetime(df['Date'])
     df = df.sort_values('Date').reset_index(drop=True)
 
-    min_reqired = max(PAST, ROLLING_WINDOW) + 1
+    min_required = max(PAST, ROLLING_WINDOW) + 1
     if len(df) < min_required:
         raise HTTPException(
-            status_code = 500, details = 'Data is not enough to predict anything'
+            status_code = 500, detail = 'Data is not enough to predict anything'
         )
     last_date = df['Date'].max()
-    last_known_price = float(df['Close'].values[-ROLLING_WINDOW:])
+    last_known_price = float(df['Close'].values[-1])
 
     lag_features = {}
         for lag in range(1, PAST + 1):
             lag_features[f'Close_lag_{lag}'] = float(df['Close'].value[-lag])
         
-        recent_windows = df['CLose'].values[-ROLLING_WINDOW:]
+        recent_windows = df['Close'].values[-ROLLING_WINDOW:]
         lag_features['rolling_mean_5'] = float(recent_windows.mean())
-        lag_features['rolling_mean_5'] = float(recent_windows.std())
+        lag_features['rolling_std_5'] = float(recent_windows.std())
         feature_row = pd.DataFrame([lag_features])
 
         return feature_row, last_date, last_known_price
 
 @app.get('/predict')
 def predict():
-    feature_row, last_date, Last_know_prica = get_latest_features
+    feature_row, last_date, last_known_price = get_latest_features
     pred_price = float(model.predict(feature_row)[0])
     target_date = last_date + timedelta(days=FUTURE)
 
