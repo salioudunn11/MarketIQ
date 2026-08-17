@@ -15,6 +15,7 @@ import {
   IonText
 } from '@ionic/react';
 import { useParams, useLocation } from 'react-router-dom';
+import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis, CartesianGrid } from 'recharts';
 
 // Define the shape of the data coming from your FastAPI backend
 interface PredictionResponse {
@@ -68,6 +69,13 @@ const DashboardResults: React.FC = () => {
 
   // Helper to parse URL query params for display
   const queryParams = new URLSearchParams(location.search);
+
+  const chartData = data
+    ? [
+        { date: data.last_known_date, actualPrice: data.last_known_price, price: data.last_known_price },
+        { date: data.prediction_target_date, actualPrice: null, price: data.predicted_price }
+      ]
+    : [];
 
   return (
     <IonPage>
@@ -134,7 +142,23 @@ const DashboardResults: React.FC = () => {
             
             {/* IN THE NEXT STEP: We will replace this placeholder with Recharts! */}
             <div style={{ textAlign: 'center', marginTop: '30px', color: 'gray' }}>
-              [ Recharts Graph Will Go Here ]
+              <ResponsiveContainer width="100%" height={300}>
+                <AreaChart width={500} height={300} data={chartData}>
+                <YAxis domain={['auto', 'auto']} />
+                <XAxis dataKey="date" />
+                  <Area 
+                  type="monotone" 
+                  dataKey="actualPrice" 
+                  stroke="#8884d8" 
+                  fill="#8884d8" />
+                   <Area 
+                  type="monotone" 
+                  dataKey="price" 
+                  stroke="#d884c6" 
+                  fill="#d884c6" />
+                </AreaChart>
+              </ResponsiveContainer>
+              <p>Chart will be displayed here once implemented.</p>
             </div>
           </>
         )}
