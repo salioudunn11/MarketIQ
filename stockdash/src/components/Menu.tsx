@@ -21,6 +21,7 @@ import {
 } from 'ionicons/icons';
 import './Menu.css';
 
+
 // One row per stock in your watchlist.
 // symbol/name/price/change would normally come from your stock_history.json
 // (latest row per ticker), not hardcoded like this.
@@ -38,12 +39,21 @@ const stocks: Stock[] = [
   { symbol: 'NVDA', name: 'Nvidia', price: 118.4, changePercent: 2.4 },
 ];
 
+  { symbol: 'GOOG', name: 'Alphabet Inc', price: 178.20, changePercent: 1.5 },
+];
+
+
 // Macro / economy pages, separate from individual stocks.
 interface Macro {
   title: string;
   url: string;
   iosIcon: string;
   mdIcon: string;
+}
+
+interface MenuProps{
+  stockChosen: string |null;
+  onSelectStock: (symbol: string) => void;
 }
 
 const macroPages: Macro[] = [
@@ -64,24 +74,23 @@ const macroPages: Macro[] = [
 const formatPrice = (price: number) =>
   price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
-const Menu: React.FC = () => {
+const Menu: React.FC<MenuProps> = ({ stockChosen, onSelectStock }) => {
   const location = useLocation();
-
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList id="stocks-list">
           <IonListHeader>MarketIQ</IonListHeader>
           {stocks.map((stock) => {
-            const url = `/stock/${stock.symbol}`;
+           
             const isPositive = stock.changePercent >= 0;
 
             return (
               <IonMenuToggle key={stock.symbol} autoHide={false}>
                 <IonItem
-                  className={location.pathname === url ? 'selected' : ''}
-                  routerLink={url}
-                  routerDirection="none"
+                className={stockChosen  === stock.symbol ? 'selected' : ''}
+                  onClick={() => onSelectStock(stock.symbol)}
+                  button // Adds the clickable ripple effect
                   lines="none"
                   detail={false}
                 >
@@ -101,28 +110,11 @@ const Menu: React.FC = () => {
                     {isPositive ? '+' : ''}
                     {stock.changePercent}%
                   </IonNote>
+
                 </IonItem>
               </IonMenuToggle>
             );
           })}
-        </IonList>
-
-        <IonList id="macro-list">
-          <IonListHeader>Markets</IonListHeader>
-          {macroPages.map((page, index) => (
-            <IonMenuToggle key={index} autoHide={false}>
-              <IonItem
-                className={location.pathname === page.url ? 'selected' : ''}
-                routerLink={page.url}
-                routerDirection="none"
-                lines="none"
-                detail={false}
-              >
-                <IonIcon aria-hidden="true" slot="start" ios={page.iosIcon} md={page.mdIcon} />
-                <IonLabel>{page.title}</IonLabel>
-              </IonItem>
-            </IonMenuToggle>
-          ))}
         </IonList>
       </IonContent>
     </IonMenu>
