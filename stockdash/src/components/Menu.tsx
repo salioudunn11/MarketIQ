@@ -39,6 +39,9 @@ const stocks: Stock[] = [
   { symbol: 'NVDA', name: 'Nvidia', price: 118.4, changePercent: 2.4 },
 ];
 
+  { symbol: 'GOOG', name: 'Alphabet Inc', price: 178.20, changePercent: 1.5 },
+];
+
 
 // Macro / economy pages, separate from individual stocks.
 interface Macro {
@@ -73,7 +76,6 @@ const formatPrice = (price: number) =>
 
 const Menu: React.FC<MenuProps> = ({ stockChosen, onSelectStock }) => {
   const location = useLocation();
-
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>

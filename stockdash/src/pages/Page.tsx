@@ -1,6 +1,15 @@
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import React from 'react';
+import {
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonMenuButton,
+  IonPage,
+  IonTitle,
+  IonToolbar
+} from '@ionic/react';
 import { useParams } from 'react-router';
-import ExploreContainer from '../components/ExploreContainer';
+import { GooglePredictionCard } from '../components/googleprediction';
 import './Page.css';
 
 interface PageProps {
@@ -9,7 +18,8 @@ interface PageProps {
 
 const Page: React.FC<PageProps> = ({ stockChosen }) => {
 
-  const { name } = useParams<{ name: string; }>();
+  const normalizedSymbol = symbol?.toUpperCase();
+  const isGoogle = !normalizedSymbol || normalizedSymbol === 'GOOG' || normalizedSymbol === 'GOOGL';
 
   return (
     <IonPage>
@@ -18,14 +28,14 @@ const Page: React.FC<PageProps> = ({ stockChosen }) => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>{name}</IonTitle>
+          <IonTitle>{symbol || 'GOOGL'} Analytics</IonTitle>
         </IonToolbar>
       </IonHeader>
 
       <IonContent fullscreen className="ion-padding">
         <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">{name}</IonTitle>
+          <IonToolbar style={{ '--background': '#f9fafb' }}>
+            <IonTitle size="large">{symbol || 'GOOGL'}</IonTitle>
           </IonToolbar>
         </IonHeader>
         <ExploreContainer name={name} stockChosen={stockChosen} />
