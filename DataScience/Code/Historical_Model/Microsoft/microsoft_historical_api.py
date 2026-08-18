@@ -7,7 +7,6 @@
 
 # app = FastAPI(title= 'Microsoft Stock XGBoost Prediction API')
 
-<<<<<<< HEAD
 # app.add.middleware(
 #     CORSMiddleware,
 #     allow_origins=['*'],
@@ -17,17 +16,6 @@
 
 # MODEL_PATH = 'export.microsoft_xgb_model.pkl'
 # CSV_PATH =  '../../../Yahoo_Finance/Google/MSFT_historical_data.csv'
-=======
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=['*'],
-    allow_methods=['GET'],
-    allow_headers=['*'],
-)
-
-MODEL_PATH = 'export/microsoft_xgb_model.pkl'
-CSV_PATH =  '../../../Yahoo_Finance/Microsoft/MSFT_historical_data.csv'
->>>>>>> origin/main
 
 # PAST = 3
 # FUTURE = 30 
@@ -40,7 +28,6 @@ CSV_PATH =  '../../../Yahoo_Finance/Microsoft/MSFT_historical_data.csv'
 #     df['Date'] = pd.to_datetime(df['Date'])
 #     df = df.sort_values('Date').reset_index(drop=True)
 
-<<<<<<< HEAD
 #     min_required = max(PAST, ROLLING_WINDOW) + 1
 #     if len(df) < min_required:
 #         raise HTTPException(
@@ -48,29 +35,14 @@ CSV_PATH =  '../../../Yahoo_Finance/Microsoft/MSFT_historical_data.csv'
 #         )
 #     last_date = df['Date'].max()
 #     last_known_price = float(df['Close'].values[-ROLLING_WINDOW:])
-=======
-    min_required = max(PAST, ROLLING_WINDOW) + 1
-    if len(df) < min_required:
-        raise HTTPException(
-            status_code = 500, details = 'Not Enough data to predict'
-        )
-    last_date = df['Date'].max()
-    last_known_price = float(df['Close'].values[-1])
->>>>>>> origin/main
 
 #     lag_features = {}
 #     for lag in range(1, PAST + 1):
 #         lag_features[f'close_lag_{lag}'] = float(df['Close'].valuse[-lag])
 
-<<<<<<< HEAD
 #     recent_windows = df['Close'].values[-ROLLING_WINDOW:]
 #     lag_features['rolling_mean_5'] = float(recent_windows.mean())
 #     lag_features['rolling_mean_5'] = float(recent_windows.std())
-=======
-    recent_windows = df['Close'].values[-ROLLING_WINDOW:]
-    lag_features['rolling_mean_5'] = float(recent_windows.mean())
-    lag_features['rolling_std_5'] = float(recent_windows.std())
->>>>>>> origin/main
 
 #     feature_row = pd.DataFrame([lag_features])
 
