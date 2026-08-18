@@ -11,14 +11,25 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
+  IonCardSubtitle,
   IonCardContent,
-  IonText
+  IonText,
+  IonBadge
 } from '@ionic/react';
 import { useParams, useLocation } from 'react-router-dom';
-import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis, CartesianGrid } from 'recharts';
+import {
+  LineChart,
+  Line,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend
+} from 'recharts';
 
-// Define the shape of the data coming from your FastAPI backend
-interface PredictionResponse {
+// Endpoint 1: GET /predict/{ticker}
+interface SinglePrediction {
   ticker: string;
   last_known_date: string;
   last_known_price: number;
@@ -28,52 +39,104 @@ interface PredictionResponse {
   horizon_days: number;
 }
 
+// Endpoint 2: POST /predict/scenario
+interface ScenarioPoint {
+  date: string;
+  AAPL: number;
+  MSFT: number;
+  GOOGL: number;
+}
+
+interface ScenarioResponse {
+  scenario: {
+    interest_rate: number;
+    inflation_rate: number;
+    unemployment_rate: number;
+    gdp_growth: number;
+  };
+  horizon_days: number;
+  chart_data: ScenarioPoint[];
+}
+
+const TICKER_COLORS: Record<string, string> = {
+  GOOGL: '#4285F4',
+  AAPL: '#A2AAAD',
+  MSFT: '#00A4EF',
+};
+
 const DashboardResults: React.FC = () => {
-  // 1. Pull the stock symbol from the URL (e.g., /dashboard/GOOGL)
-  const { symbol } = useParams<{ symbol: string }>();
-  
-  // 2. Pull the macro variables from the URL query string (e.g., ?inflation=3.2)
+  const { symbol = 'GOOGL' } = useParams<{ symbol: string }>();
+  const activeSymbol = symbol.toUpperCase();
   const location = useLocation();
 
-  // 3. Set up state to manage the API data, loading status, and errors
-  const [data, setData] = useState<PredictionResponse | null>(null);
+  const [singleData, setSingleData] = useState<SinglePrediction | null>(null);
+  const [scenarioData, setScenarioData] = useState<ScenarioResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  // 4. Fetch the data when the component mounts
+  const searchParams = new URLSearchParams(location.search);
+  const hasMacroParams =
+    searchParams.has('inflation') &&
+    searchParams.has('interestRate') &&
+    searchParams.has('unemploymentRate') &&
+    searchParams.has('gdp');
+
   useEffect(() => {
-    const fetchPrediction = async () => {
+    const fetchData = async () => {
       setLoading(true);
       setError(null);
+      setSingleData(null);
+      setScenarioData(null);
 
       try {
-        // Fetching from your local Uvicorn server
-        const response = await fetch('http://127.0.0.1:8000/predict');
-        
-        if (!response.ok) {
-          throw new Error(`API error: ${response.statusText}`);
+        if (hasMacroParams) {
+          // Send macro simulation scenario to POST /predict/scenario
+          const payload = {
+            inflation_rate: parseFloat(searchParams.get('inflation') || '0'),
+            interest_rate: parseFloat(searchParams.get('interestRate') || '0'),
+            unemployment_rate: parseFloat(searchParams.get('unemploymentRate') || '0'),
+            gdp_growth: parseFloat(searchParams.get('gdp') || '0'),
+          };
+
+          const response = await fetch('http://127.0.0.1:8000/predict/scenario', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+
+          if (!response.ok) {
+            throw new Error(`Scenario API error: ${response.statusText}`);
+          }
+
+          const result: ScenarioResponse = await response.json();
+          setScenarioData(result);
+        } else {
+          // Fetch historical model prediction for single ticker
+          const response = await fetch(`http://127.0.0.1:8000/predict/${activeSymbol}`);
+
+          if (!response.ok) {
+            throw new Error(`Single Ticker API error: ${response.statusText}`);
+          }
+
+          const result: SinglePrediction = await response.json();
+          setSingleData(result);
         }
-        
-        const result: PredictionResponse = await response.json();
-        setData(result);
       } catch (err: any) {
-        console.error("Failed to fetch prediction:", err);
-        setError(err.message || 'Failed to connect to the backend.');
+        console.error('Failed to fetch prediction:', err);
+        setError(err.message || 'Failed to connect to the backend server.');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchPrediction();
-  }, [symbol]); // The dependency array ensures it re-runs if the symbol changes
+    fetchData();
+  }, [activeSymbol, location.search]);
 
-  // Helper to parse URL query params for display
-  const queryParams = new URLSearchParams(location.search);
-
-  const chartData = data
+  // Single ticker fallback chart formatting
+  const singleChartData = singleData
     ? [
-        { date: data.last_known_date, actualPrice: data.last_known_price, price: data.last_known_price },
-        { date: data.prediction_target_date, actualPrice: null, price: data.predicted_price }
+        { date: singleData.last_known_date, [activeSymbol]: singleData.last_known_price },
+        { date: singleData.prediction_target_date, [activeSymbol]: singleData.predicted_price },
       ]
     : [];
 
@@ -84,82 +147,131 @@ const DashboardResults: React.FC = () => {
           <IonButtons slot="start">
             <IonBackButton defaultHref="/macro/inflation" />
           </IonButtons>
-          <IonTitle>{symbol} Forecast</IonTitle>
+          <IonTitle>{activeSymbol} Forecast</IonTitle>
         </IonToolbar>
       </IonHeader>
 
       <IonContent className="ion-padding">
-        {/* State 1: Loading */}
+        {/* Loading State */}
         {loading && (
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60vh' }}>
             <IonSpinner name="crescent" />
-            <span style={{ marginLeft: '10px' }}>Running LSTM Model...</span>
+            <span style={{ marginLeft: '12px', fontSize: '1.1rem' }}>
+              {hasMacroParams ? 'Simulating 30-Day Scenario...' : `Fetching ${activeSymbol} Model...`}
+            </span>
           </div>
         )}
 
-        {/* State 2: Error */}
+        {/* Error State */}
         {!loading && error && (
           <IonCard color="danger">
             <IonCardHeader>
               <IonCardTitle>Connection Error</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
-              {error}
-              <p>Make sure your FastAPI server is running on port 8000.</p>
+              <p>{error}</p>
+              <p style={{ marginTop: '8px', fontSize: '0.9rem' }}>
+                Ensure your FastAPI server is running on <code>http://127.0.0.1:8000</code>.
+              </p>
             </IonCardContent>
           </IonCard>
         )}
 
-        {/* State 3: Success (Data Loaded) */}
-        {!loading && data && (
+        {/* Success State */}
+        {!loading && !error && (
           <>
-            <IonCard>
-              <IonCardHeader>
-                <IonCardTitle>Prediction Results for {data.ticker}</IonCardTitle>
-              </IonCardHeader>
-              <IonCardContent>
-                <h2>Last Known Price: <strong>${data.last_known_price}</strong> <IonText color="medium">({data.last_known_date})</IonText></h2>
-                <h2>Predicted Price: <strong>${data.predicted_price}</strong> <IonText color="primary">({data.prediction_target_date})</IonText></h2>
-                <hr style={{ margin: '15px 0', background: '#444' }} />
-                <p><strong>Lookback Window:</strong> {data.lookback_days} days</p>
-                <p><strong>Forecast Horizon:</strong> {data.horizon_days} days</p>
-              </IonCardContent>
-            </IonCard>
+            {/* Macro Scenario Header Card */}
+            {hasMacroParams && scenarioData && (
+              <IonCard>
+                <IonCardHeader>
+                  <IonCardTitle>30-Day Economic Simulation</IonCardTitle>
+                  <IonCardSubtitle>Applied Macro Parameters</IonCardSubtitle>
+                </IonCardHeader>
+                <IonCardContent>
+                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                    <IonBadge color="primary">Inflation: {scenarioData.scenario.inflation_rate}%</IonBadge>
+                    <IonBadge color="secondary">Interest Rate: {scenarioData.scenario.interest_rate}%</IonBadge>
+                    <IonBadge color="tertiary">Unemployment: {scenarioData.scenario.unemployment_rate}%</IonBadge>
+                    <IonBadge color="success">GDP Growth: {scenarioData.scenario.gdp_growth}%</IonBadge>
+                  </div>
+                </IonCardContent>
+              </IonCard>
+            )}
 
+            {/* Single Ticker Stat Summary */}
+            {!hasMacroParams && singleData && (
+              <IonCard>
+                <IonCardHeader>
+                  <IonCardTitle>Prediction Summary: {singleData.ticker}</IonCardTitle>
+                </IonCardHeader>
+                <IonCardContent>
+                  <h2>
+                    Last Price: <strong>${singleData.last_known_price}</strong>{' '}
+                    <IonText color="medium">({singleData.last_known_date})</IonText>
+                  </h2>
+                  <h2>
+                    30-Day Forecast: <strong>${singleData.predicted_price}</strong>{' '}
+                    <IonText color="primary">({singleData.prediction_target_date})</IonText>
+                  </h2>
+                  <hr style={{ margin: '15px 0', borderColor: 'var(--ion-color-step-150)' }} />
+                  <p><strong>Lookback Window:</strong> {singleData.lookback_days} days</p>
+                  <p><strong>Horizon:</strong> {singleData.horizon_days} days</p>
+                </IonCardContent>
+              </IonCard>
+            )}
+
+            {/* Interactive Recharts Visualization */}
             <IonCard>
               <IonCardHeader>
-                <IonCardTitle>Macro Inputs Used</IonCardTitle>
+                <IonCardTitle>
+                  {hasMacroParams ? 'Multi-Asset Projected Trajectory' : `${activeSymbol} Forecast Chart`}
+                </IonCardTitle>
               </IonCardHeader>
               <IonCardContent>
-                <ul>
-                  <li>Inflation: {queryParams.get('inflation')}%</li>
-                  <li>Interest Rate: {queryParams.get('interestRate')}%</li>
-                  <li>Unemployment: {queryParams.get('unemploymentRate')}%</li>
-                  <li>GDP Growth: {queryParams.get('gdp')}%</li>
-                </ul>
+                <div style={{ width: '100%', height: 320 }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart
+                      data={hasMacroParams ? scenarioData?.chart_data : singleChartData}
+                      margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
+                      <XAxis dataKey="date" tick={{ fontSize: 12 }} />
+                      <YAxis domain={['auto', 'auto']} tick={{ fontSize: 12 }} />
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: 'var(--ion-background-color, #1e1e1e)',
+                          borderColor: '#444',
+                          borderRadius: '8px',
+                        }}
+                      />
+                      <Legend />
+
+                      {hasMacroParams ? (
+                        ['AAPL', 'MSFT', 'GOOGL'].map((ticker) => (
+                          <Line
+                            key={ticker}
+                            type="monotone"
+                            dataKey={ticker}
+                            stroke={TICKER_COLORS[ticker] || '#8884d8'}
+                            strokeWidth={ticker === activeSymbol ? 3 : 1.5}
+                            opacity={ticker === activeSymbol ? 1 : 0.5}
+                            dot={false}
+                          />
+                        ))
+                      ) : (
+                        <Line
+                          type="monotone"
+                          dataKey={activeSymbol}
+                          stroke={TICKER_COLORS[activeSymbol] || '#3880ff'}
+                          strokeWidth={2.5}
+                          dot={{ r: 4 }}
+                        />
+                      )}
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
               </IonCardContent>
             </IonCard>
-            
-            {/* IN THE NEXT STEP: We will replace this placeholder with Recharts! */}
-            <div style={{ textAlign: 'center', marginTop: '30px', color: 'gray' }}>
-              <ResponsiveContainer width="100%" height={300}>
-                <AreaChart width={500} height={300} data={chartData}>
-                <YAxis domain={['auto', 'auto']} />
-                <XAxis dataKey="date" />
-                  <Area 
-                  type="monotone" 
-                  dataKey="actualPrice" 
-                  stroke="#8884d8" 
-                  fill="#8884d8" />
-                   <Area 
-                  type="monotone" 
-                  dataKey="price" 
-                  stroke="#d884c6" 
-                  fill="#d884c6" />
-                </AreaChart>
-              </ResponsiveContainer>
-              <p>Chart will be displayed here once implemented.</p>
-            </div>
           </>
         )}
       </IonContent>
