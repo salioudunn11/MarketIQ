@@ -1,3 +1,4 @@
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
@@ -36,6 +37,8 @@ def get_latest_features():
     last_date = df['Date'].max()
     last_known_price = float(df['Close'].values[-1])
 
+    # Rebuild the same features the model was trained on.
+    # close_lag_1 = most recent close, close_lag_2 = one before that, etc.
     lag_features = {}
     for lag in range(1, LOOKBACK + 1):
         lag_features[f'close_lag_{lag}'] = float(df['Close'].values[-lag])
@@ -71,3 +74,4 @@ def predict():
 @app.get("/health")
 def health():
     return {"status": "ok"}
+

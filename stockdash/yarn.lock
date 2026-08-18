@@ -1083,9 +1083,9 @@
     tslib "^2.1.0"
 
 "@ionic/react-router@^8.8.17":
-  version "8.8.18"
-  resolved "https://registry.yarnpkg.com/@ionic/react-router/-/react-router-8.8.18.tgz#57e71635021d2880185918ab969a2ed1e50c475d"
-  integrity sha512-Io75A7wDKT4Jbk0hDK/6Nn+Q+gncPY9a5GoTkhnebXvvjNT9fOaCRaHIVfc53uSii+wr3d3OcNWxY531xLeBAA==
+  version "8.8.17"
+  resolved "https://registry.yarnpkg.com/@ionic/react-router/-/react-router-8.8.17.tgz#41084a1ef8312d48ad99e47b947074476ca8ad55"
+  integrity sha512-01korH2Jl2dOQm9XCppyYsqMhIBV1wknLGUUEeDcOulX1jFOCE5EPBJtMgH0cnpWmwhXEZ2lIJjt3jdswEUh9Q==
   dependencies:
     "@ionic/react" "8.8.18"
     tslib "*"
@@ -2227,9 +2227,9 @@ base64-js@^1.3.1:
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
 
 baseline-browser-mapping@^2.11.12:
-  version "2.11.15"
-  resolved "https://registry.yarnpkg.com/baseline-browser-mapping/-/baseline-browser-mapping-2.11.15.tgz#9c0cac93d7d304f3d61bb41088a102cd62e68676"
-  integrity sha512-FwMjJJ7HnyZpWe+oWxegG0fezZyBZUagI5LZEoO3GCbtbKNwRfMH9Ue5d5v01PNePBy1QSfPSDTTeVL0Hb9EzA==
+  version "2.11.13"
+  resolved "https://registry.yarnpkg.com/baseline-browser-mapping/-/baseline-browser-mapping-2.11.13.tgz#660073103c1bee93e54df55f117b7528adf6af19"
+  integrity sha512-k9HNuUVMlqVjQ9UHzfPjIqiDbWw7WqT1AoT7GL8VwvF3r0ZfArtgiSPAlmupyNquNgOJHTuH4CKYf8ttMTWBTQ==
 
 bcrypt-pbkdf@^1.0.0:
   version "1.0.2"
@@ -2818,9 +2818,9 @@ ecc-jsbn@~0.1.1:
     safer-buffer "^2.1.0"
 
 electron-to-chromium@^1.5.402:
-  version "1.5.409"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.409.tgz#3d514dd82b2d181d8ade96c53242f4b8c94ab4ed"
-  integrity sha512-ChI4N44d0B4A6C8prnNjMOaGgE59fUyEVYcRYm2XEXIjMbbvF5i9UL1cblDbpGqiU0uS8FE8UcKxqZqTXdmzbQ==
+  version "1.5.404"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.404.tgz#9f34e6d20ae29575fbae701680c2e9f292a92929"
+  integrity sha512-3WJtd7/lVq2Jnuz6wed1l9+1ZD2u2Tet1/1NBc4Iedkmgbu+I7YuAqdAQ8T+VZtnwysMsAf3IqSq9D1gyZjA2g==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -4636,7 +4636,8 @@ react-dom@19.0.0:
   dependencies:
     scheduler "^0.25.0"
 
-"react-is-18@npm:react-is@^18.3.1":
+"react-is-18@npm:react-is@^18.3.1", react-is@^18.0.0:
+  name react-is-18
   version "18.3.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.3.1.tgz#e83557dc12eae63a99e003a46388b1dcbb44db7e"
   integrity sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==
@@ -4655,11 +4656,6 @@ react-is@^17.0.1:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
-
-react-is@^18.0.0:
-  version "18.3.1"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.3.1.tgz#e83557dc12eae63a99e003a46388b1dcbb44db7e"
-  integrity sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==
 
 "react-redux@8.x.x || 9.x.x":
   version "9.3.0"

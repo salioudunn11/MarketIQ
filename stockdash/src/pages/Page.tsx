@@ -19,7 +19,7 @@ const Page: React.FC = () => {
   const isGoogle = !normalizedSymbol || normalizedSymbol === 'GOOG' || normalizedSymbol === 'GOOGL';
 
   return (
-    <IonPage>
+    <IonPage id="main">
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
