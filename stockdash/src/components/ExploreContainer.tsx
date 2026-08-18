@@ -88,3 +88,4 @@ const ExploreContainer: React.FC<ContainerProps> = ({ stockChosen }) => {
 };
 
 export default ExploreContainer;
+
