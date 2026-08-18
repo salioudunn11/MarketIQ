@@ -36,11 +36,17 @@
 #     last_date = df['Date'].max()
 #     last_known_price = float(df['Close'].values[-1])
 
+<<<<<<< HEAD
 #     # Rebuild the same features the model was trained on.
 #     # close_lag_1 = most recent close, close_lag_2 = one before that, etc.
 #     lag_features = {}
 #     for lag in range(1, LOOKBACK + 1):
 #         lag_features[f'close_lag_{lag}'] = float(df['Close'].values[-lag])
+=======
+    lag_features = {}
+    for lag in range(1, LOOKBACK + 1):
+        lag_features[f'close_lag_{lag}'] = float(df['Close'].values[-lag])
+>>>>>>> origin/main
 
 #     recent_window = df['Close'].values[-ROLLING_WINDOW:]
 #     lag_features['rolling_mean_5'] = float(recent_window.mean())
