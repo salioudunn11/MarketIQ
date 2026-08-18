@@ -17,6 +17,7 @@ const Header: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) => (
       <IonButton
         className="btn btn-primary header-btn"
         onClick={onGetStarted}
+        href="/macro/inflation"
       >
         Get Started
       </IonButton>
