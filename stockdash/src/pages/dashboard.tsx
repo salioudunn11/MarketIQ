@@ -11,6 +11,7 @@ import {
 } from '@ionic/react';
 import Menu from '../components/Menu';
 import ExploreContainer from '../components/ExploreContainer';
+import '../styles/Dashboard.scss';
 
 const Dashboard: React.FC = () => {
   // 1. Centralized state shared by both child components
@@ -18,7 +19,9 @@ const Dashboard: React.FC = () => {
 
   return (
     // IonSplitPane creates a persistent sidebar on desktop and a collapsable drawer on mobile
-    <IonSplitPane contentId="main-content">
+    <IonSplitPane contentId="main-content"
+    className="dashboard-split-pane"  
+    >
       
       {/* 2. Menu receives the state value and the state setter callback */}
       <Menu
@@ -28,8 +31,8 @@ const Dashboard: React.FC = () => {
 
       {/* 3. Main content container matching the contentId */}
       <IonPage id="main-content">
-        <IonHeader>
-          <IonToolbar>
+        <IonHeader className="dashboard-header">
+          <IonToolbar className="dashboard-toolbar">
             <IonButtons slot="start">
               {/* Automatically displays a hamburger icon on mobile viewports */}
               <IonMenuButton />
@@ -40,7 +43,7 @@ const Dashboard: React.FC = () => {
           </IonToolbar>
         </IonHeader>
 
-        <IonContent fullscreen className="ion-padding">
+        <IonContent fullscreen className="ion-padding dashboard-content">
           {/* 4. ExploreContainer receives the selected stock to run validation checks */}
           <ExploreContainer stockChosen={selectedStock} />
         </IonContent>
