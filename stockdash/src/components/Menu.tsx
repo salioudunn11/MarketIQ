@@ -35,13 +35,10 @@ interface Stock {
 const stocks: Stock[] = [
   { symbol: 'AAPL', name: 'Apple Inc.', price: 178.52, changePercent: 0.7 },
   { symbol: 'MSFT', name: 'Microsoft', price: 412.3, changePercent: 1.2 },
-  { symbol: 'TSLA', name: 'Tesla', price: 241.9, changePercent: -1.8 },
-  { symbol: 'NVDA', name: 'Nvidia', price: 118.4, changePercent: 2.4 },
-];
-
   { symbol: 'GOOG', name: 'Alphabet Inc', price: 178.20, changePercent: 1.5 },
 ];
 
+  
 
 // Macro / economy pages, separate from individual stocks.
 interface Macro {

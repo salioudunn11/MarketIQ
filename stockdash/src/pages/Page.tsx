@@ -8,8 +8,8 @@ import {
   IonTitle,
   IonToolbar
 } from '@ionic/react';
-import { useParams } from 'react-router';
-import { GooglePredictionCard } from '../components/googleprediction';
+import { useParams } from 'react-router-dom';
+import ExploreContainer from '../components/ExploreContainer';
 import './Page.css';
 
 interface PageProps {
@@ -17,28 +17,32 @@ interface PageProps {
 }
 
 const Page: React.FC<PageProps> = ({ stockChosen }) => {
+  // Extract route parameters safely from URL path
+  const { name, symbol } = useParams<{ name?: string; symbol?: string }>();
 
-  const normalizedSymbol = symbol?.toUpperCase();
-  const isGoogle = !normalizedSymbol || normalizedSymbol === 'GOOG' || normalizedSymbol === 'GOOGL';
+  // Consolidate symbol from URL param, prop state, or default fallback
+  const activeSymbol = symbol || stockChosen || 'GOOGL';
+  const normalizedSymbol = activeSymbol.toUpperCase();
+  const isGoogle = normalizedSymbol === 'GOOG' || normalizedSymbol === 'GOOGL';
 
   return (
-    <IonPage>
+    <IonPage id="main">
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>{symbol || 'GOOGL'} Analytics</IonTitle>
+          <IonTitle>{activeSymbol} Analytics</IonTitle>
         </IonToolbar>
       </IonHeader>
 
       <IonContent fullscreen className="ion-padding">
         <IonHeader collapse="condense">
           <IonToolbar style={{ '--background': '#f9fafb' }}>
-            <IonTitle size="large">{symbol || 'GOOGL'}</IonTitle>
+            <IonTitle size="large">{activeSymbol}</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name={name} stockChosen={stockChosen} />
+        <ExploreContainer name={name} stockChosen={activeSymbol} />
       </IonContent>
     </IonPage>
   );

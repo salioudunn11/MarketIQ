@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { IonApp, IonRouterOutlet, IonSplitPane, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { Route } from "react-router";
+import { Route, Redirect } from "react-router-dom";
 import Menu from './components/Menu';
 import Page from './pages/Page';
 import DashboardResults from './pages/Charting-and-api/DasboardResults';

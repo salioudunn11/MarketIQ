@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonSpinner, IonBadge } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent,  IonSpinner } from '@ionic/react';
 import { getGooglePrediction } from '../services/googleApi';
 import { GooglePredictionResponse } from '../types/google';
 
