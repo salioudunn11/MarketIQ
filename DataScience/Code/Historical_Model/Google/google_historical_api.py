@@ -1,3 +1,4 @@
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
@@ -73,3 +74,4 @@ def predict():
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
