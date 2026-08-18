@@ -38,7 +38,6 @@ const stocks: Stock[] = [
   { symbol: 'GOOG', name: 'Alphabet Inc', price: 178.20, changePercent: 1.5 },
 ];
 
-  
 
 // Macro / economy pages, separate from individual stocks.
 interface Macro {

@@ -8,22 +8,15 @@ import {
   IonTitle,
   IonToolbar
 } from '@ionic/react';
-import { useParams } from 'react-router-dom';
-import ExploreContainer from '../components/ExploreContainer';
+import { useParams } from 'react-router';
+import { GooglePredictionCard } from '../components/googleprediction';
 import './Page.css';
 
-interface PageProps {
-  stockChosen: string | null;
-}
+const Page: React.FC = () => {
+  const { symbol } = useParams<{ symbol: string }>();
 
-const Page: React.FC<PageProps> = ({ stockChosen }) => {
-  // Extract route parameters safely from URL path
-  const { name, symbol } = useParams<{ name?: string; symbol?: string }>();
-
-  // Consolidate symbol from URL param, prop state, or default fallback
-  const activeSymbol = symbol || stockChosen || 'GOOGL';
-  const normalizedSymbol = activeSymbol.toUpperCase();
-  const isGoogle = normalizedSymbol === 'GOOG' || normalizedSymbol === 'GOOGL';
+  const normalizedSymbol = symbol?.toUpperCase();
+  const isGoogle = !normalizedSymbol || normalizedSymbol === 'GOOG' || normalizedSymbol === 'GOOGL';
 
   return (
     <IonPage id="main">
@@ -32,17 +25,40 @@ const Page: React.FC<PageProps> = ({ stockChosen }) => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>{activeSymbol} Analytics</IonTitle>
+          <IonTitle>{symbol || 'GOOGL'} Analytics</IonTitle>
         </IonToolbar>
       </IonHeader>
 
-      <IonContent fullscreen className="ion-padding">
+      <IonContent fullscreen className="ion-padding" style={{ '--background': '#f9fafb' }}>
         <IonHeader collapse="condense">
           <IonToolbar style={{ '--background': '#f9fafb' }}>
-            <IonTitle size="large">{activeSymbol}</IonTitle>
+            <IonTitle size="large">{symbol || 'GOOGL'}</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name={name} stockChosen={activeSymbol} />
+
+        <div style={{ maxWidth: '720px', margin: '20px auto' }}>
+          {/* Display Python LSTM Model Card when GOOG/GOOGL is selected */}
+          {isGoogle ? (
+            <GooglePredictionCard />
+          ) : (
+            <div
+              style={{
+                padding: '24px',
+                backgroundColor: '#ffffff',
+                borderRadius: '12px',
+                border: '1px solid #e5e7eb',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
+              }}
+            >
+              <h2 style={{ margin: '0 0 8px 0', color: '#111827', fontSize: '20px', fontWeight: '600' }}>
+                {symbol} Overview
+              </h2>
+              <p style={{ color: '#6b7280', fontSize: '14px', lineHeight: '1.5' }}>
+                Analytics for {symbol} are not yet available.
+              </p>
+            </div>
+          )}
+        </div>
       </IonContent>
     </IonPage>
   );
