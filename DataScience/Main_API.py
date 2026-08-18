@@ -42,7 +42,8 @@ TICKERS = {
     },
 }
 
-_models = {ticker: joblib.load(cfg["model_path"]) for ticker, cfg in TICKERS.items()}
+_models = {ticker: joblib.load(cfg["model_path"])
+           for ticker, cfg in TICKERS.items()}
 
 
 def get_latest_features(ticker: str):
@@ -53,7 +54,8 @@ def get_latest_features(ticker: str):
 
     min_required = max(LOOKBACK, ROLLING_WINDOW) + 1
     if len(df) < min_required:
-        raise HTTPException(status_code=500, detail=f"Not enough data to predict for {ticker}")
+        raise HTTPException(
+            status_code=500, detail=f"Not enough data to predict for {ticker}")
 
     last_date = df["Date"].max()
     last_known_price = float(df["Close"].values[-1])
@@ -75,7 +77,8 @@ def get_latest_features(ticker: str):
 def predict(ticker: str):
     ticker = ticker.upper()
     if ticker not in TICKERS:
-        raise HTTPException(status_code=404, detail=f"Unknown ticker '{ticker}'. Valid: {list(TICKERS.keys())}")
+        raise HTTPException(
+            status_code=404, detail=f"Unknown ticker '{ticker}'. Valid: {list(TICKERS.keys())}")
 
     feature_row, last_date, last_known_price = get_latest_features(ticker)
     model = _models[ticker]
@@ -96,8 +99,6 @@ def predict(ticker: str):
 @app.get("/predict")
 def predict_all():
     return [predict(ticker) for ticker in TICKERS]
-
-
 
 
 ECON_TICKERS = ["AAPL", "MSFT", "GOOGL"]
@@ -175,7 +176,8 @@ def predict_scenario(scenario: EconomicScenario):
     """Returns a 30-day predicted price path for all 3 tickers under
     the given hypothetical economic conditions -- shaped for a
     multi-line chart with one series per ticker."""
-    series = {ticker: simulate_ticker(ticker, scenario) for ticker in ECON_TICKERS}
+    series = {ticker: simulate_ticker(ticker, scenario)
+              for ticker in ECON_TICKERS}
 
     return {
         "scenario": scenario.dict(),

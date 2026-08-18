@@ -30,6 +30,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import '@ionic/react/css/palettes/dark.system.css';
 import './theme/variables.css';
+import LandingPage from './pages/LandingPage';
 
 setupIonicReact();
 
