@@ -16,7 +16,7 @@ const Header: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) => (
       </div>
       <IonButton
   className="btn btn-primary header-btn"
-  routerLink="/macro/inflation"
+  href="/dashboard"
 >
   Get Started
 </IonButton>
@@ -318,6 +318,7 @@ const LandingPage: React.FC = () => {
             <IonButton
               className="btn btn-primary cta-btn"
               onClick={handleGetStarted}
+              href='/dashboard'
             >
               Get Started
             </IonButton>
