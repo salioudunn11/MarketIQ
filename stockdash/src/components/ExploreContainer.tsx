@@ -3,13 +3,10 @@ import {
   IonButton,
   IonCard,
   IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
   IonInput,
   IonItem,
   IonList,
-  useIonRouter,
+  useIonRouter // Add this import
 } from '@ionic/react';
 import { useState } from 'react';
 
@@ -19,7 +16,7 @@ interface ContainerProps {
 }
 
 const ExploreContainer: React.FC<ContainerProps> = ({ stockChosen }) => {
-  const router = useIonRouter();
+  const router = useIonRouter(); // Initialize the router hook
 
   const [inflation, setInflation] = useState<string>('');
   const [interestRate, setInterestRate] = useState<string>('');
@@ -29,17 +26,22 @@ const ExploreContainer: React.FC<ContainerProps> = ({ stockChosen }) => {
   const activeSymbol = stockChosen || 'GOOGL';
 
   const handleExplore = () => {
+    // 1. Validate inputs (optional but recommended)
     if (!inflation || !interestRate || !unemploymentRate || !gdp) {
-      alert('Please fill out all required economic indicators.');
+      alert("Please fill in all macro indicators.");
       return;
     }
 
+    // 2. Default to a stock if none was selected in the Menu
+    const targetSymbol = stockChosen || 'GOOGL'; 
+
+    // 3. Construct the query string with the form values
     const queryParams = `?inflation=${encodeURIComponent(inflation)}&interestRate=${encodeURIComponent(interestRate)}&unemploymentRate=${encodeURIComponent(unemploymentRate)}&gdp=${encodeURIComponent(gdp)}`;
 
-    // Pushes to the dynamic dashboard route matching App.tsx
-    router.push(`/dashboard/${activeSymbol}${queryParams}`, 'forward', 'push');
+    // 4. Use the router to navigate to DashboardResults
+    router.push(`/dashboard/${targetSymbol}${queryParams}`, 'forward', 'push');
   };
-
+  
   return (
     <div id="container">
       <IonCard>
@@ -53,14 +55,7 @@ const ExploreContainer: React.FC<ContainerProps> = ({ stockChosen }) => {
         <IonCardContent>
           <IonList lines="full">
             <IonItem>
-              <IonInput
-                labelPlacement="floating"
-                placeholder="e.g. 3.2"
-                type="number"
-                step="0.1"
-                value={inflation}
-                onIonInput={(e) => setInflation(e.detail.value ?? '')}
-              >
+              <IonInput labelPlacement="floating" placeholder="Enter Text" type="number" value={inflation} onIonInput={(e) => setInflation(e.detail.value!)} >
                 <div slot="label">
                   Inflation Rate (%) <span style={{ color: 'var(--ion-color-danger)' }}>*</span>
                 </div>
@@ -68,14 +63,7 @@ const ExploreContainer: React.FC<ContainerProps> = ({ stockChosen }) => {
             </IonItem>
 
             <IonItem>
-              <IonInput
-                labelPlacement="floating"
-                placeholder="e.g. 5.25"
-                type="number"
-                step="0.1"
-                value={interestRate}
-                onIonInput={(e) => setInterestRate(e.detail.value ?? '')}
-              >
+              <IonInput labelPlacement="floating" placeholder="Enter Text" type="number" value={interestRate} onIonInput={(e) => setInterestRate(e.detail.value!)}>
                 <div slot="label">
                   Interest Rate (%) <span style={{ color: 'var(--ion-color-danger)' }}>*</span>
                 </div>
@@ -83,14 +71,7 @@ const ExploreContainer: React.FC<ContainerProps> = ({ stockChosen }) => {
             </IonItem>
 
             <IonItem>
-              <IonInput
-                labelPlacement="floating"
-                placeholder="e.g. 4.0"
-                type="number"
-                step="0.1"
-                value={unemploymentRate}
-                onIonInput={(e) => setUnemploymentRate(e.detail.value ?? '')}
-              >
+              <IonInput labelPlacement="floating" placeholder="Enter Text" type="number" value={unemploymentRate} onIonInput={(e) => setUnemploymentRate(e.detail.value!)}>
                 <div slot="label">
                   Unemployment Rate (%) <span style={{ color: 'var(--ion-color-danger)' }}>*</span>
                 </div>
@@ -98,34 +79,22 @@ const ExploreContainer: React.FC<ContainerProps> = ({ stockChosen }) => {
             </IonItem>
 
             <IonItem>
-              <IonInput
-                labelPlacement="floating"
-                placeholder="e.g. 2.5"
-                type="number"
-                step="0.1"
-                value={gdp}
-                onIonInput={(e) => setGdp(e.detail.value ?? '')}
-              >
+              <IonInput labelPlacement="floating" placeholder="Enter Text" type="number" value={gdp} onIonInput={(e) => setGdp(e.detail.value!)}>
                 <div slot="label">
                   GDP Growth Rate (%) <span style={{ color: 'var(--ion-color-danger)' }}>*</span>
                 </div>
               </IonInput>
             </IonItem>
-          </IonList>
+            </IonList> 
 
-          <IonButton
-            expand="block"
-            color="primary"
-            fill="solid"
-            onClick={handleExplore}
-            className="ion-margin-top"
-          >
-            Run Prediction Model
-          </IonButton>
-        </IonCardContent>
+            <IonButton color="primary" fill="solid" onClick={handleExplore} className="ion-margin-top">
+              Explore
+            </IonButton>
+          </IonCardContent>
       </IonCard>
     </div>
   );
 };
 
 export default ExploreContainer;
+

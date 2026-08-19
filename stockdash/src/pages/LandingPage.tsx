@@ -15,12 +15,21 @@ const Header: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) => (
         Market<span className="highlight">IQ</span>
       </div>
       <IonButton
+<<<<<<< HEAD
   className="btn btn-primary header-btn"
   href="/dashboard"
 >
   Get Started
 </IonButton>
 </div>
+=======
+        className="btn btn-primary header-btn"
+        onClick={onGetStarted}
+      >
+        Get Started
+      </IonButton>
+    </div>
+>>>>>>> 781735cdd258007fe29c48f66a3c1b8ae97aa0ad
   </header>
 );
 
