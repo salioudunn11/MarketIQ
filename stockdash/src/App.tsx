@@ -36,20 +36,33 @@ const MainLayout: React.FC = () => {
 
   return (
     <IonSplitPane contentId="main">
-      <Menu stockChosen={stockChosen} onSelectStock={setStockChosen} />
+      <Menu
+        stockChosen={stockChosen}
+        onSelectStock={setStockChosen}
+      />
+
       <IonRouterOutlet id="main">
-        {/* Metrics Input Form Page */}
+
         <Route
           path="/macro/:name"
           exact={true}
-          render={() => <Page stockChosen={stockChosen} />}
+          render={() => (
+            <Page stockChosen={stockChosen} />
+          )}
         />
 
-        {/* Prediction Results Page */}
-        <Route path="/dashboard/:symbol" exact={true} component={DashboardResults} />
+        <Route
+          path="/dashboard/:symbol"
+          exact={true}
+          component={DashboardResults}
+        />
 
-        {/* Redirect base /dashboard straight to the metrics input form */}
-        <Redirect exact from="/dashboard" to="/macro/inflation" />
+        <Redirect
+          exact
+          from="/dashboard"
+          to="/macro/inflation"
+        />
+
       </IonRouterOutlet>
     </IonSplitPane>
   );

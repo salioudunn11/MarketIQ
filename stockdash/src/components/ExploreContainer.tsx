@@ -1,4 +1,4 @@
-import './ExploreContainer.css';
+import '../styles/ExploreContainer.scss';
 import {
   IonButton,
   IonCard,
