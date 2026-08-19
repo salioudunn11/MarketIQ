@@ -1,55 +1,118 @@
 import React, { useState } from 'react';
 import {
-  IonButtons,
+  IonPage,
   IonContent,
   IonHeader,
-  IonMenuButton,
-  IonPage,
-  IonSplitPane,
-  IonTitle,
   IonToolbar,
+  IonTitle,
+  IonButton,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
+  IonItem,
+  IonLabel,
+  IonInput,
 } from '@ionic/react';
-import Menu from '../components/Menu';
-import ExploreContainer from '../components/ExploreContainer';
-import '../styles/Dashboard.scss';
+import { useHistory } from 'react-router-dom';
+
+const DEFAULT_SYMBOL = 'GOOGL';
 
 const Dashboard: React.FC = () => {
-  // 1. Centralized state shared by both child components
-  const [selectedStock, setSelectedStock] = useState<string | null>(null);
+  const history = useHistory();
+
+  const [interestRate, setInterestRate] = useState<string>('');
+  const [inflation, setInflation] = useState<string>('');
+  const [unemploymentRate, setUnemploymentRate] = useState<string>('');
+  const [gdp, setGdp] = useState<string>('');
+
+  const allFieldsFilled =
+    interestRate !== '' && inflation !== '' && unemploymentRate !== '' && gdp !== '';
+
+  const handleExecute = () => {
+    if (!allFieldsFilled) return;
+
+    const params = new URLSearchParams({
+      inflation,
+      interestRate,
+      unemploymentRate,
+      gdp,
+    });
+
+    history.push(`/dashboard/${DEFAULT_SYMBOL}?${params.toString()}`);
+  };
 
   return (
-    // IonSplitPane creates a persistent sidebar on desktop and a collapsable drawer on mobile
-    <IonSplitPane contentId="main-content"
-    className="dashboard-split-pane"  
-    >
-      
-      {/* 2. Menu receives the state value and the state setter callback */}
-      <Menu
-        stockChosen={selectedStock}
-        onSelectStock={(symbol) => setSelectedStock(symbol)}
-      />
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>MarketIQ Dashboard</IonTitle>
+        </IonToolbar>
+      </IonHeader>
 
-      {/* 3. Main content container matching the contentId */}
-      <IonPage id="main-content">
-        <IonHeader className="dashboard-header">
-          <IonToolbar className="dashboard-toolbar">
-            <IonButtons slot="start">
-              {/* Automatically displays a hamburger icon on mobile viewports */}
-              <IonMenuButton />
-            </IonButtons>
-            <IonTitle>
-              {selectedStock ? `MarketIQ — ${selectedStock}` : 'MarketIQ — Select a Stock'}
-            </IonTitle>
-          </IonToolbar>
-        </IonHeader>
+      <IonContent className="ion-padding">
+        <IonCard>
+          <IonCardHeader>
+            <IonCardTitle>Enter Economic Scenario</IonCardTitle>
+          </IonCardHeader>
+          <IonCardContent>
+            <p style={{ marginBottom: '20px', color: 'var(--ion-color-medium)' }}>
+              Input hypothetical economic conditions to see a 30-day projected
+              trajectory for AAPL, MSFT, and GOOGL.
+            </p>
 
-        <IonContent fullscreen className="ion-padding dashboard-content">
-          {/* 4. ExploreContainer receives the selected stock to run validation checks */}
-          <ExploreContainer stockChosen={selectedStock} />
-        </IonContent>
-      </IonPage>
+            <IonItem>
+              <IonLabel position="stacked">Interest Rate (%)</IonLabel>
+              <IonInput
+                type="number"
+                placeholder="e.g. 5.25"
+                value={interestRate}
+                onIonInput={(e) => setInterestRate(e.detail.value ?? '')}
+              />
+            </IonItem>
 
-    </IonSplitPane>
+            <IonItem>
+              <IonLabel position="stacked">Inflation Rate (%)</IonLabel>
+              <IonInput
+                type="number"
+                placeholder="e.g. 3.1"
+                value={inflation}
+                onIonInput={(e) => setInflation(e.detail.value ?? '')}
+              />
+            </IonItem>
+
+            <IonItem>
+              <IonLabel position="stacked">Unemployment Rate (%)</IonLabel>
+              <IonInput
+                type="number"
+                placeholder="e.g. 4.0"
+                value={unemploymentRate}
+                onIonInput={(e) => setUnemploymentRate(e.detail.value ?? '')}
+              />
+            </IonItem>
+
+            <IonItem>
+              <IonLabel position="stacked">GDP Growth (%)</IonLabel>
+              <IonInput
+                type="number"
+                placeholder="e.g. 2.5"
+                value={gdp}
+                onIonInput={(e) => setGdp(e.detail.value ?? '')}
+              />
+            </IonItem>
+
+            <IonButton
+              expand="block"
+              className="ion-margin-top"
+              disabled={!allFieldsFilled}
+              onClick={handleExecute}
+            >
+              Execute
+            </IonButton>
+          </IonCardContent>
+        </IonCard>
+      </IonContent>
+    </IonPage>
   );
 };
 

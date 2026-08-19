@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { IonApp, IonRouterOutlet, IonSplitPane, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { Redirect, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 /* Navigation Components & Pages */
 import Menu from './components/Menu';
 import Page from './pages/Page';
 import LandingPage from './pages/LandingPage';
+import Dashboard from './pages/Dashboard';
 import DashboardResults from './pages/Charting-and-api/DasboardResults';
 
 /* Core CSS required for Ionic components to work properly */
@@ -27,11 +28,9 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import LandingPage from './pages/LandingPage';
 
 setupIonicReact();
 
-// 1. Dedicated Layout with SplitPane and Sidebar Menu for App Pages
 const MainLayout: React.FC = () => {
   const [stockChosen, setStockChosen] = useState<string | null>('GOOGL');
 
@@ -53,15 +52,15 @@ const MainLayout: React.FC = () => {
         />
 
         <Route
+          path="/dashboard"
+          exact={true}
+          component={Dashboard}
+        />
+
+        <Route
           path="/dashboard/:symbol"
           exact={true}
           component={DashboardResults}
-        />
-
-        <Redirect
-          exact
-          from="/dashboard"
-          to="/macro/inflation"
         />
 
       </IonRouterOutlet>
@@ -69,16 +68,12 @@ const MainLayout: React.FC = () => {
   );
 };
 
-// 2. Root App Router
 const App: React.FC = () => {
   return (
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
-          {/* Full-Screen Landing Page */}
           <Route path="/" exact={true} component={LandingPage} />
-
-          {/* App Views inside SplitPane */}
           <Route path="/dashboard" component={MainLayout} />
           <Route path="/macro" component={MainLayout} />
         </IonRouterOutlet>
