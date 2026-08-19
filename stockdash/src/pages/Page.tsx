@@ -1,11 +1,23 @@
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { useParams } from 'react-router';
+import React from 'react';
+import {
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonMenuButton,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/react';
+import { useParams } from 'react-router-dom';
 import ExploreContainer from '../components/ExploreContainer';
 import './Page.css';
 
-const Page: React.FC = () => {
+interface PageProps {
+  stockChosen: string | null;
+}
 
-  const { name } = useParams<{ name: string; }>();
+const Page: React.FC<PageProps> = ({ stockChosen }) => {
+  const { name } = useParams<{ name: string }>();
 
   return (
     <IonPage>
@@ -14,17 +26,32 @@ const Page: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>{name}</IonTitle>
+
+          <IonTitle>
+            {name
+              ? name.charAt(0).toUpperCase() + name.slice(1)
+              : 'Macroeconomic'}{' '}
+            Analytics
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
 
-      <IonContent fullscreen>
+      <IonContent
+        fullscreen
+        className="ion-padding"
+        style={{ '--background': '#f9fafb' }}
+      >
         <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">{name}</IonTitle>
+          <IonToolbar style={{ '--background': '#f9fafb' }}>
+            <IonTitle size="large">
+              {name
+                ? name.charAt(0).toUpperCase() + name.slice(1)
+                : 'Macroeconomic'}
+            </IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name={name} />
+
+        <ExploreContainer stockChosen={stockChosen} />
       </IonContent>
     </IonPage>
   );

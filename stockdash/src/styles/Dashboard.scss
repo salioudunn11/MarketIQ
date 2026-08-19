@@ -1,0 +1,288 @@
+// Color Variables (Same as LandingPage)
+$taupe: #54494B;
+$grey: #7E8287;
+$ash-grey: #9DA39A;
+$dusty-rose: #B98389;
+$raspberry: #DB2955;
+
+// ===== DASHBOARD CONTAINER =====
+.dashboard-container {
+  --background: linear-gradient(135deg, #2a2628 0%, #3d3a3c 50%, #4a4548 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+// ===== DASHBOARD HEADER =====
+.dashboard-header {
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(219, 41, 85, 0.15);
+  padding: 20px;
+  margin-bottom: 40px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 8px 0;
+
+    .highlight {
+      color: $raspberry;
+    }
+  }
+
+  p {
+    font-size: 14px;
+    color: $ash-grey;
+    margin: 0;
+  }
+}
+
+// ===== DASHBOARD GRID =====
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ===== DASHBOARD CARD =====
+.dashboard-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(219, 41, 85, 0.12);
+  border-radius: 12px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: rgba(219, 41, 85, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(219, 41, 85, 0.15);
+  }
+
+  .card-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+  }
+
+  .card-label {
+    font-size: 11px;
+    color: $grey;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 12px;
+  }
+
+  .card-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: $raspberry;
+    margin-bottom: 16px;
+  }
+
+  .card-description {
+    font-size: 13px;
+    color: $ash-grey;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+// ===== DASHBOARD STATS =====
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(219, 41, 85, 0.15);
+  border: 1px solid rgba(219, 41, 85, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 40px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat-item {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 20px;
+
+  .stat-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: $grey;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: $raspberry;
+    margin: 0;
+  }
+}
+
+// ===== DASHBOARD TABLE =====
+.dashboard-table {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(219, 41, 85, 0.12);
+  border-radius: 12px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  margin-bottom: 40px;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+      background: rgba(219, 41, 85, 0.1);
+      border-bottom: 1px solid rgba(219, 41, 85, 0.15);
+    }
+
+    th {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: $dusty-rose;
+      padding: 16px;
+      text-align: left;
+    }
+
+    td {
+      padding: 16px;
+      border-bottom: 1px solid rgba(219, 41, 85, 0.1);
+      font-size: 14px;
+      color: $ash-grey;
+    }
+
+    tbody tr {
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba(219, 41, 85, 0.05);
+      }
+    }
+  }
+}
+
+// ===== DASHBOARD CHART CONTAINER =====
+.dashboard-chart {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(219, 41, 85, 0.12);
+  border-radius: 12px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+  margin-bottom: 40px;
+
+  .chart-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+
+  canvas {
+    max-height: 300px;
+  }
+}
+
+// ===== BUTTONS =====
+.btn {
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 12px 24px;
+  font-size: 13px;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, $raspberry 0%, #c92550 100%);
+  color: white;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(219, 41, 85, 0.3);
+  }
+}
+
+.btn-secondary {
+  background: rgba(219, 41, 85, 0.12);
+  border: 2px solid $dusty-rose;
+  color: $dusty-rose;
+
+  &:hover:not(:disabled) {
+    background: rgba(219, 41, 85, 0.2);
+  }
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid $raspberry;
+  color: $raspberry;
+
+  &:hover:not(:disabled) {
+    background: rgba(219, 41, 85, 0.1);
+  }
+}
+
+// ===== RESPONSIVE =====
+@media (max-width: 768px) {
+  .dashboard-header {
+    h1 {
+      font-size: 28px;
+    }
+  }
+
+  .dashboard-card {
+    padding: 16px;
+
+    .card-value {
+      font-size: 24px;
+    }
+  }
+
+  .stat-item {
+    padding: 16px;
+
+    .stat-value {
+      font-size: 20px;
+    }
+  }
+}
