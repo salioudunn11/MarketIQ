@@ -4,11 +4,10 @@ import {
   IonPage,
   IonButton,
 } from '@ionic/react';
-import { useHistory } from 'react-router-dom';
-import '../styles/LandingPages.scss'; // Import the CSS for styling
+import '../styles/LandingPages.scss';
 
 // ===== HEADER COMPONENT =====
-const Header: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) => (
+const Header: React.FC = () => (
   <header className="landing-header">
     <div className="header-content">
       <div className="logo">
@@ -16,7 +15,6 @@ const Header: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) => (
       </div>
       <IonButton
         className="btn btn-primary header-btn"
-        onClick={onGetStarted}
         href="/dashboard"
       >
         Get Started
@@ -95,7 +93,6 @@ const AboutUsSection: React.FC = () => {
   return (
     <section className="about-section">
       <div className="about-container">
-        {/* LEFT SIDE - TEXT & STATS */}
         <div className="about-content">
           <div className="section-header-left">
             <h2>About MarketIQ</h2>
@@ -116,7 +113,6 @@ const AboutUsSection: React.FC = () => {
              We identify patterns that human analysts miss and translate them into actionable investment recommendations.
           </p>
 
-          {/* STATS GRID */}
           <div className="stats-grid">
             {stats.map((stat) => (
               <StatCard key={stat.label} {...stat} />
@@ -146,7 +142,6 @@ const AboutUsSection: React.FC = () => {
           </div>
         </div>
 
-        {/* RIGHT SIDE - CHART VISUALIZATION */}
         <div className="about-chart">
           <div className="chart-card">
             <div className="chart-header">
@@ -157,7 +152,6 @@ const AboutUsSection: React.FC = () => {
               <span className="chart-badge">Annualized</span>
             </div>
 
-            {/* SVG CHART */}
             <svg viewBox="0 0 400 180" className="performance-chart">
               <defs>
                 <linearGradient id="chart-fill" x1="0" y1="0" x2="0" y2="1">
@@ -165,19 +159,16 @@ const AboutUsSection: React.FC = () => {
                   <stop offset="100%" stopColor="#DB2955" stopOpacity="0" />
                 </linearGradient>
               </defs>
-              {/* Area under curve */}
               <path
                 d="M0 150 L40 138 L80 128 L120 112 L160 98 L200 88 L240 72 L280 62 L320 50 L360 35 L400 30 L400 180 L0 180 Z"
                 fill="url(#chart-fill)"
               />
-              {/* Line */}
               <path
                 d="M0 150 L40 138 L80 128 L120 112 L160 98 L200 88 L240 72 L280 62 L320 50 L360 35 L400 30"
                 fill="none"
                 stroke="#DB2955"
                 strokeWidth="2"
               />
-              {/* Trend line */}
               <path
                 d="M0 162 L80 152 L160 136 L240 116 L320 92 L400 68"
                 fill="none"
@@ -187,7 +178,6 @@ const AboutUsSection: React.FC = () => {
               />
             </svg>
 
-            {/* BAR CHART */}
             <div className="volume-bars">
               {[38, 52, 30, 64, 44, 72, 40, 58, 34, 80, 48, 66].map((h, i) => (
                 <span
@@ -199,7 +189,6 @@ const AboutUsSection: React.FC = () => {
             </div>
             <p className="chart-footnote">Trading Volume - Last 12 Months</p>
 
-            {/* KEY METRICS */}
             <div className="chart-metrics">
               <div className="metric">
                 <span className="metric-label">50/200d Moving Avg</span>
@@ -233,13 +222,6 @@ const Footer: React.FC = () => (
 
 // ===== MAIN LANDING PAGE COMPONENT =====
 const LandingPage: React.FC = () => {
-  const history = useHistory();
-
-  const handleGetStarted = () => {
-    // Route to dashboard - update path as needed
-    history.push('/dashboard');
-  };
-
   const features: CardProps[] = [
     {
       icon: '',
@@ -279,10 +261,8 @@ const LandingPage: React.FC = () => {
     <IonPage>
       <IonContent className="landing-content">
         
-        {/* HEADER */}
-        <Header onGetStarted={handleGetStarted} />
+        <Header />
 
-        {/* HERO SECTION */}
         <section className="hero-section">
           <div className="hero-content">
             <h1 className="hero-headline">
@@ -294,7 +274,6 @@ const LandingPage: React.FC = () => {
           </div>
         </section>
 
-        {/* FEATURES SECTION */}
         <section className="features-section">
           <div className="section-header">
             <h2>Understanding Market Drivers</h2>
@@ -308,17 +287,14 @@ const LandingPage: React.FC = () => {
           </div>
         </section>
 
-        {/* ABOUT US SECTION */}
         <AboutUsSection />
 
-        {/* CTA SECTION */}
         <section className="cta-section">
           <div className="cta-content">
             <h2>Ready to Make Smarter Investments?</h2>
             <p>Join thousands of investors who trust MarketIQ. Get started free today—no credit card required.</p>
             <IonButton
               className="btn btn-primary cta-btn"
-              onClick={handleGetStarted}
               href="/dashboard"
             >
               Get Started
@@ -326,7 +302,6 @@ const LandingPage: React.FC = () => {
           </div>
         </section>
 
-        {/* FOOTER */}
         <Footer />
 
       </IonContent>
