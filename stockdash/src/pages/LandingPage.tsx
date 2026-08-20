@@ -15,7 +15,7 @@ const Header: React.FC = () => (
       </div>
       <IonButton
         className="btn btn-primary header-btn"
-        href="/dashboard"
+        href="/macro/inflation"
       >
         Get Started
       </IonButton>
@@ -295,7 +295,7 @@ const LandingPage: React.FC = () => {
             <p>Join thousands of investors who trust MarketIQ. Get started free today—no credit card required.</p>
             <IonButton
               className="btn btn-primary cta-btn"
-              href="/dashboard"
+              href="/macro/inflation"
             >
               Get Started
             </IonButton>

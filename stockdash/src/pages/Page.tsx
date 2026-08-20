@@ -11,7 +11,7 @@ import {
 import { useParams } from 'react-router-dom';
 import ExploreContainer from '../components/ExploreContainer';
 import './Page.css';
-
+import '../styles/Dashboard.scss';
 interface PageProps {
   stockChosen: string | null;
 }

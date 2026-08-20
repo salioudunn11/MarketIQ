@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '../../styles/Dashboard.scss';
 import {
   IonBackButton,
   IonButtons,
@@ -14,7 +15,10 @@ import {
   IonCardSubtitle,
   IonCardContent,
   IonText,
-  IonBadge
+  IonBadge,
+  IonGrid,
+  IonRow,
+  IonCol
 } from '@ionic/react';
 import { useParams, useLocation } from 'react-router-dom';
 import {
@@ -25,7 +29,9 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend
+  Legend,
+  AreaChart,
+  Area
 } from 'recharts';
 
 // Endpoint 1: GET /predict/{ticker}
@@ -59,9 +65,9 @@ interface ScenarioResponse {
 }
 
 const TICKER_COLORS: Record<string, string> = {
-  GOOGL: '#4285F4',
-  AAPL: '#A2AAAD',
-  MSFT: '#00A4EF',
+  GOOGL: '#20660b',
+  AAPL: '#163642',
+  MSFT: '#590753',
 };
 
 const DashboardResults: React.FC = () => {
@@ -268,6 +274,62 @@ const DashboardResults: React.FC = () => {
                         />
                       )}
                     </LineChart>
+
+                    {hasMacroParams && scenarioData && (
+                      <>
+                     <h3 style={{ paddingLeft: '16px', marginTop: '24px', fontWeight: 'bold' }}>
+                  Individual Asset Impacts
+                </h3>
+                <IonGrid className="ion-no-padding">
+                  <IonRow>
+                    {['AAPL', 'MSFT', 'GOOGL'].map((ticker) => (
+                      <IonCol size="12" sizeMd="4" key={ticker}>
+                        <IonCard>
+                          <IonCardHeader>
+                            <IonCardSubtitle>{ticker} Simulated Trend</IonCardSubtitle>
+                          </IonCardHeader>
+                          <IonCardContent>
+                            {/* 150px height creates a clean "sparkline" card aesthetic */}
+                            <div style={{ width: '100%', height: 150 }}>
+                              <ResponsiveContainer width="100%" height="100%">
+                                <AreaChart data={scenarioData.chart_data}>
+                                  <defs>
+                                    <linearGradient id={`color${ticker}`} x1="0" y1="0" x2="0" y2="1">
+                                      <stop offset="5%" stopColor={TICKER_COLORS[ticker] || '#8884d8'} stopOpacity={0.5}/>
+                                      <stop offset="95%" stopColor={TICKER_COLORS[ticker] || '#8884d8'} stopOpacity={0}/>
+                                    </linearGradient>
+                                  </defs>
+                                  {/* Hiding Axes keeps the mini-charts uncluttered */}
+                                  <XAxis dataKey="date" hide />
+                                  <YAxis domain={['auto', 'auto']} hide />
+                                  <Tooltip 
+                                    contentStyle={{
+                                      backgroundColor: 'var(--ion-background-color, #1e1e1e)',
+                                      borderColor: '#444',
+                                      borderRadius: '8px',
+                                      fontSize: '12px'
+                                    }}
+                                  />
+                                  <Area
+                                    type="monotone"
+                                    dataKey={ticker}
+                                    stroke={TICKER_COLORS[ticker] || '#8884d8'}
+                                    strokeWidth={2}
+                                    fillOpacity={1}
+                                    fill={`url(#color${ticker})`}
+                                  />
+                                </AreaChart>
+                              </ResponsiveContainer>
+                            </div>
+                          </IonCardContent>
+                        </IonCard>
+                      </IonCol>
+                    ))}
+                  </IonRow>
+                </IonGrid>
+                      </>
+
+                    )}
                   </ResponsiveContainer>
                 </div>
               </IonCardContent>

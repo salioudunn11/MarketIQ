@@ -23,8 +23,6 @@ const ExploreContainer: React.FC<ContainerProps> = ({ stockChosen }) => {
   const [unemploymentRate, setUnemploymentRate] = useState<string>('');
   const [gdp, setGdp] = useState<string>('');
 
-  const activeSymbol = stockChosen || 'GOOGL';
-
   const handleExplore = () => {
     // 1. Validate inputs (optional but recommended)
     if (!inflation || !interestRate || !unemploymentRate || !gdp) {
@@ -45,43 +43,36 @@ const ExploreContainer: React.FC<ContainerProps> = ({ stockChosen }) => {
   return (
     <div id="container">
       <IonCard>
-        <IonCardHeader>
-          <IonCardTitle>Macroeconomic Scenario Input</IonCardTitle>
-          <IonCardSubtitle>
-            Target Asset: <strong>{activeSymbol}</strong>
-          </IonCardSubtitle>
-        </IonCardHeader>
-
         <IonCardContent>
-          <IonList lines="full">
+          <IonList>
             <IonItem>
-              <IonInput labelPlacement="floating" placeholder="Enter Text" type="number" value={inflation} onIonInput={(e) => setInflation(e.detail.value!)} >
+              <IonInput labelPlacement="floating" placeholder="Enter Text" text-color="black" type="number" value={inflation} onIonInput={(e) => setInflation(e.detail.value!)} >
                 <div slot="label">
-                  Inflation Rate (%) <span style={{ color: 'var(--ion-color-danger)' }}>*</span>
+                  Inflation <span style={{ color: 'var(--ion-color-danger)' }}>(Required)</span>
                 </div>
               </IonInput>
             </IonItem>
 
             <IonItem>
-              <IonInput labelPlacement="floating" placeholder="Enter Text" type="number" value={interestRate} onIonInput={(e) => setInterestRate(e.detail.value!)}>
+              <IonInput labelPlacement="floating" placeholder="Enter Text" text-color="black" type="number" value={interestRate} onIonInput={(e) => setInterestRate(e.detail.value!)}>
                 <div slot="label">
-                  Interest Rate (%) <span style={{ color: 'var(--ion-color-danger)' }}>*</span>
+                  Interest Rate <span style={{ color: 'var(--ion-color-danger)' }}>(Required)</span>
                 </div>
               </IonInput>
             </IonItem>
 
             <IonItem>
-              <IonInput labelPlacement="floating" placeholder="Enter Text" type="number" value={unemploymentRate} onIonInput={(e) => setUnemploymentRate(e.detail.value!)}>
+              <IonInput labelPlacement="floating" placeholder="Enter Text" text-color="black" type="number" value={unemploymentRate} onIonInput={(e) => setUnemploymentRate(e.detail.value!)}>
                 <div slot="label">
-                  Unemployment Rate (%) <span style={{ color: 'var(--ion-color-danger)' }}>*</span>
+                  Unemployment Rate <span style={{ color: 'var(--ion-color-danger)' }}>(Required)</span>
                 </div>
               </IonInput>
             </IonItem>
 
             <IonItem>
-              <IonInput labelPlacement="floating" placeholder="Enter Text" type="number" value={gdp} onIonInput={(e) => setGdp(e.detail.value!)}>
+              <IonInput labelPlacement="floating" placeholder="Enter Text" text-color="black" type="number" value={gdp} onIonInput={(e) => setGdp(e.detail.value!)}>
                 <div slot="label">
-                  GDP Growth Rate (%) <span style={{ color: 'var(--ion-color-danger)' }}>*</span>
+                  GDP <span style={{ color: 'var(--ion-color-danger)' }}>(Required)</span>
                 </div>
               </IonInput>
             </IonItem>
